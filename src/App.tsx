@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import type React from 'react';
+// eslint-disable-next-line no-duplicate-imports
+import { useState } from 'react';
 import { Tab, Tabs, Box } from '@mui/material';
 import Header from './components/Header';
 import Profile from './components/Profile';
@@ -12,7 +14,7 @@ import TabPanel from './components/TabPanel';
 const App: React.FC = () => {
   const [activeTab, setActiveTab] = useState(0);
 
-  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+  const handleChange = (_event: React.SyntheticEvent, newValue: number):void => {
     setActiveTab(newValue);
   };
 
@@ -42,42 +44,42 @@ const App: React.FC = () => {
               className={`py-2 px-4 rounded-lg cursor-pointer ${
                 activeTab === 0 ? 'bg-gray-800 text-white' : 'text-gray-800 hover:bg-gray-200'
               }`}
-              onClick={(event) => handleChange(event, 0)}
+              onClick={(event: React.SyntheticEvent) => { handleChange(event, 0); }}
             />
             <Tab
               label="Technologies"
               className={`py-2 px-4 rounded-lg cursor-pointer ${
                 activeTab === 1 ? 'bg-gray-800 text-white' : 'text-gray-800 hover:bg-gray-200'
               }`}
-              onClick={(event) => handleChange(event, 1)}
+              onClick={(event: React.SyntheticEvent) => { handleChange(event, 1); }}
             />
             <Tab
               label="Work Experience"
               className={`py-2 px-4 rounded-lg cursor-pointer ${
                 activeTab === 2 ? 'bg-gray-800 text-white' : 'text-gray-800 hover:bg-gray-200'
               }`}
-              onClick={(event) => handleChange(event, 2)}
+              onClick={(event: React.SyntheticEvent) => { handleChange(event, 2); }}
             />
             <Tab
               label="Education"
               className={`py-2 px-4 rounded-lg cursor-pointer ${
                 activeTab === 3 ? 'bg-gray-800 text-white' : 'text-gray-800 hover:bg-gray-200'
               }`}
-              onClick={(event) => handleChange(event, 3)}
+              onClick={(event: React.SyntheticEvent) => { handleChange(event, 3); }}
             />
             <Tab
               label="Personal Experience"
               className={`py-2 px-4 rounded-lg cursor-pointer ${
                 activeTab === 4 ? 'bg-gray-800 text-white' : 'text-gray-800 hover:bg-gray-200'
               }`}
-              onClick={(event) => handleChange(event, 4)}
+              onClick={(event: React.SyntheticEvent) => { handleChange(event, 4); }}
             />
             <Tab
               label="Projects"
               className={`py-2 px-4 rounded-lg cursor-pointer ${
                 activeTab === 4 ? 'bg-gray-800 text-white' : 'text-gray-800 hover:bg-gray-200'
               }`}
-              onClick={(event) => handleChange(event, 5)}
+              onClick={(event: React.SyntheticEvent) => { handleChange(event, 5); }}
             />
           </Tabs>
         </Box>
