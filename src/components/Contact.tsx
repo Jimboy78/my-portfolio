@@ -1,6 +1,4 @@
-import type React from 'react';
-// eslint-disable-next-line no-duplicate-imports
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 
 const Contact: React.FC = () => {
@@ -16,9 +14,9 @@ const Contact: React.FC = () => {
             <span className="font-semibold">martiniseba78@gmail.com</span>
             <CopyToClipboard
               text="martiniseba78@gmail.com"
-              onCopy={() => {setCopied(true)}}
+              onCopy={() => setCopied(true)}
             >
-              <button className="text-white p-1 rounded-md hover:bg-slate-100 transition duration-300 flex items-center">
+              <button className=" text-white p-1 rounded-md hover:bg-slate-100 transition duration-300 flex items-center">
                 <img
                   src={copied ? '/green-check-icon.png' : '/clip-icon.png'}
                   alt={copied ? 'Copied' : 'Copy'}
