@@ -1,73 +1,88 @@
-import type React from "react";
-import {
-	Card,
-	CardContent,
-	CardHeader,
-	CardActions,
-	Typography,
-	Button,
-} from "@mui/material";
+import type * as React from "react";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import CardMedia from "@mui/material/CardMedia";
+import Typography from "@mui/material/Typography";
+import Button from "@mui/material/Button";
+import CardActions from "@mui/material/CardActions";
+import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
+
+const projects = [
+	{
+		title: "E-commerce Platform",
+		description: "A full-stack e-commerce solution with React and Node.js",
+		image: "/placeholder-1.png",
+	},
+	{
+		title: "Weather App",
+		description:
+			"A real-time weather application using React and OpenWeatherMap API",
+		image: "/placeholder-1.png",
+	},
+	{
+		title: "Task Management System",
+		description:
+			"A collaborative task management tool built with React and Firebase",
+		image: "/placeholder-1.png",
+	},
+];
 
 const Projects: React.FC = () => {
 	return (
 		<section
 			id="projects"
-			className="my-8 bg-white shadow-lg shadow-gray-200 rounded-lg p-6"
+			style={{ padding: "3rem 0", backgroundColor: "transparent" }}
 		>
-			<Typography
-				variant="h5"
-				component="h5"
-				className="bg-gray-800 p-2 rounded-md text-white font-bold"
-			>
-				Proyectos
-			</Typography>
-			<div className="gap-4 flex justify-around my-6">
-				<Card sx={{ maxWidth: 400 }}>
-					<CardHeader
-						title="Project 1"
-						subheader="A brief description of Project 1"
-						sx={{ backgroundColor: "#f5f5f5", fontWeight: "bold" }}
-					/>
-					<CardContent>
-						<img
-							src="/placeholder.svg?height=200&width=400"
-							alt="Project 1"
-							className="w-full h-40 object-cover mb-4 rounded-lg"
-						/>
-						<Typography variant="body2" color="textSecondary">
-							Details about Project 1...
-						</Typography>
-					</CardContent>
-					<CardActions>
-						<Button variant="contained" color="primary">
-							View Project
-						</Button>
-					</CardActions>
-				</Card>
-
-				<Card sx={{ maxWidth: 400 }}>
-					<CardHeader
-						title="Project 2"
-						subheader="A brief description of Project 2"
-						sx={{ backgroundColor: "#f5f5f5" }}
-					/>
-					<CardContent>
-						<img
-							src="/placeholder.svg?height=200&width=400"
-							alt="Project 2"
-							className="w-full h-40 object-cover mb-4 rounded-lg"
-						/>
-						<Typography variant="body2" color="textSecondary">
-							Details about Project 2...
-						</Typography>
-					</CardContent>
-					<CardActions>
-						<Button variant="contained" color="primary">
-							View Project
-						</Button>
-					</CardActions>
-				</Card>
-			</div>
+			<Box sx={{ maxWidth: "1200px", margin: "0 auto", padding: "0 1rem" }}>
+				<Typography
+					variant="h4"
+					gutterBottom
+					align="center"
+					sx={{ color: "white", marginBottom: "2rem" }}
+				>
+					My Projects
+				</Typography>
+				<Grid container spacing={4}>
+					{projects.map((project, index) => (
+						<Grid item xs={12} sm={6} md={4} key={index}>
+							<Card
+								sx={{
+									maxWidth: 345,
+									backgroundColor: "rgb(31 41 55)",
+									color: "white",
+									padding: "10px",
+								}}
+							>
+								<CardMedia
+									component="img"
+									height="140"
+									image={project.image}
+									alt={project.title}
+								/>
+								<CardContent>
+									<Typography
+										gutterBottom
+										variant="h5"
+										component="div"
+										sx={{ color: "white" }}
+									>
+										{project.title}
+									</Typography>
+									<Typography variant="body2" color="text.secondary text-white">
+										{project.description}
+									</Typography>
+								</CardContent>
+								<CardActions>
+									<Button size="small" color="primary">
+										View Project
+									</Button>
+								</CardActions>
+							</Card>
+						</Grid>
+					))}
+				</Grid>
+			</Box>
 		</section>
 	);
 };

@@ -1,105 +1,65 @@
 import type React from "react";
-import {
-	Box,
-	Typography,
-	Divider,
-	List,
-	ListItem,
-	ListItemText,
-} from "@mui/material";
+
+const educationData = [
+	{
+		degree: "University Analyst in Systems",
+		institution: "Instituto Politécnico Superior, Rosario",
+		year: "2021 - 2023",
+	},
+	{
+		degree:
+			"SQL - Functions, stored procedures, triggers, DCL and TCL, Datawarehouse in Business Intelligence",
+		institution: "Coderhouse",
+		year: "Aug. 2023 - Nov. 2023",
+	},
+	{
+		degree:
+			"App Development - React Native, Redux, Login & authentication, SQLite",
+		institution: "Coderhouse",
+		year: "Apr. 2023 - Jun. 2023",
+	},
+	{
+		degree:
+			"React JS - JSX and transpiling, routing and navigation, events, API consumption, Firebase",
+		institution: "Coderhouse",
+		year: "Jan. 2023 - Mar. 2023",
+	},
+	{
+		degree: "JavaScript - Storage and JSON, library, AJAX and Fetch, Node JS",
+		institution: "Coderhouse",
+		year: "Sep. 2022 - Nov. 2022",
+	},
+	{
+		degree: "Python - Django, Object-Oriented Programming, Git-Github",
+		institution: "Coderhouse",
+		year: "Dec. 2021 - Mar. 2022",
+	},
+	{
+		degree: "Electronic Technician",
+		institution: "School N° 2073 'San Pablo', Villa Constitución",
+		year: "2013 - 2018",
+	},
+];
 
 const Education: React.FC = () => {
 	return (
-		<section>
-			<Box
-				sx={{
-					backgroundColor: "#ffffff",
-					boxShadow: "0 4px 10px rgba(31, 41, 55, 0.2)",
-					borderRadius: 2,
-					padding: 4,
-					maxWidth: 800,
-					margin: "0 auto",
-				}}
-			>
-				<Box className="bg-gray-800 p-2 rounded-md ">
-					<Typography
-						variant="h5"
-						fontWeight="bold"
-						color={"white"}
-						gutterBottom
-						margin={0}
-					>
-						Education
-					</Typography>
-				</Box>
-
-				{/* Instituto Politécnico Superior */}
-				<Box sx={{ mb: 3 }}>
-					<List>
-						<Typography variant="h6" fontWeight="bold" gutterBottom>
-							Instituto Politécnico Superior, Rosario
-						</Typography>
-						<Typography variant="subtitle1" color="textSecondary" gutterBottom>
-							2021 - 2023
-						</Typography>
-						<Typography variant="body1">
-							University Analyst in Systems
-						</Typography>
-					</List>
-				</Box>
-				<Divider sx={{ mb: 3 }} />
-
-				{/* Coderhouse */}
-				<Box sx={{ mb: 3 }}>
-					<Typography variant="h6" fontWeight="bold" gutterBottom>
-						Coderhouse
-					</Typography>
-					<List>
-						<ListItem>
-							<ListItemText
-								primary="SQL - Functions, stored procedures, triggers, DCL and TCL, Datawarehouse in Business Intelligence"
-								secondary="Aug. 2023 - Nov. 2023"
-							/>
-						</ListItem>
-						<ListItem>
-							<ListItemText
-								primary="App Development - React Native, Redux, Login & authentication, SQLite"
-								secondary="Apr. 2023 - Jun. 2023"
-							/>
-						</ListItem>
-						<ListItem>
-							<ListItemText
-								primary="React JS - JSX and transpiling, routing and navigation, events, API consumption, Firebase"
-								secondary="Jan. 2023 - Mar. 2023"
-							/>
-						</ListItem>
-						<ListItem>
-							<ListItemText
-								primary="JavaScript - Storage and JSON, library, AJAX and Fetch, Node JS"
-								secondary="Sep. 2022 - Nov. 2022"
-							/>
-						</ListItem>
-						<ListItem>
-							<ListItemText
-								primary="Python - Django, Object-Oriented Programming, Git-Github"
-								secondary="Dec. 2021 - Mar. 2022"
-							/>
-						</ListItem>
-					</List>
-				</Box>
-				<Divider sx={{ mb: 3 }} />
-
-				{/* School N° 2073 “San Pablo” */}
-				<Box>
-					<Typography variant="h6" fontWeight="bold" gutterBottom>
-						School N° 2073 “San Pablo”, Villa Constitución
-					</Typography>
-					<Typography variant="subtitle1" color="textSecondary" gutterBottom>
-						2013 - 2018
-					</Typography>
-					<Typography variant="body1">Electronic Technician</Typography>
-				</Box>
-			</Box>
+		<section id="education" className="py-12 bg-transparent">
+			<div className="container mx-auto px-6">
+				<h2 className="text-3xl font-bold text-center text-white mb-8">
+					Education
+				</h2>
+				<div className="grid  gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+					{educationData.map((edu, index) => (
+						<div key={index} className="p-6 bg-gray-800 shadow-lg rounded-lg">
+							<h3 className="text-xl font-bold text-white mb-2">
+								{edu.degree}
+							</h3>
+							<p className="text-yellow-400 text-lg mb-2">{edu.institution}</p>
+							<p className="text-white text-sm">{edu.year}</p>
+						</div>
+					))}
+				</div>
+			</div>
 		</section>
 	);
 };

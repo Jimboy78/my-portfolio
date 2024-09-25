@@ -1,82 +1,96 @@
+/* eslint-disable unicorn/consistent-function-scoping */
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
 import type React from "react";
-import SoftSkills from "./SoftSkills";
-import Languages from "./Languages";
-import Contact from "./Contact";
+import { Github, Linkedin, X } from "lucide-react";
 
 const Profile: React.FC = () => {
+	const handleDownloadCV = () => {
+		const link = document.createElement("a");
+		link.href = "/resume.pdf"; // Cambia esta ruta a donde esté tu CV
+		link.download = "resume.pdf"; // Nombre del archivo descargado
+		document.body.append(link);
+		link.click();
+		link.remove();
+	};
+
 	return (
-		<div className="flex">
-			<div className="my-8 bg-white shadow-lg shadow-gray-200 rounded-lg p-6 mx-auto md:flex md:flex-row md:max-w-7xl md:mx-auto w-3/4">
-				<div className=" md:mr-6 ">
-					<div className="flex flex-col items-center mb-6">
-						<h1 className="text-3xl font-bold mb-2 text-gray-800">
-							Sebastian Martini
-						</h1>
-						<p className="text-gray-600">Full Stack Software Developer</p>
-					</div>
-					<div className="text-gray-700 leading-relaxed space-y-4">
-						<p className="text-lg">
-							🌟 I am a passionate{" "}
-							<strong>Full Stack Software Developer</strong> with extensive
-							experience across various technologies and projects. My career
-							spans from managing online game servers to creating utility
-							scripts and developing websites. 💼 I immerse myself fully into
-							the computer world, surrounding myself with technology and
-							constantly seeking to expand my knowledge and skills. 🌐
-						</p>
-						<p className="text-lg">
-							💻 Over the years, I have worked with a variety of programming
-							languages and frameworks, including <strong>JavaScript</strong>,{" "}
-							<strong>Python</strong>, <strong>Java</strong>, and{" "}
-							<strong>C#</strong>. 🖥️ I have a solid understanding of both{" "}
-							<strong>frontend</strong> and <strong>backend development</strong>
-							, and I am proficient in modern technologies such as{" "}
-							<strong>React</strong>, <strong>Node.js</strong>, and{" "}
-							<strong>Docker</strong>. My diverse skill set allows me to tackle
-							complex problems and deliver high-quality solutions. 🔧
-						</p>
-						<p className="text-lg">
-							🚀 I have successfully led multiple projects from conception to
-							deployment, often taking on the role of both developer and project
-							manager. 📈 My ability to communicate effectively with
-							stakeholders and team members ensures that projects are completed
-							on time and meet all requirements. I am particularly skilled in{" "}
-							<strong>Agile methodologies</strong>, which I use to manage
-							workflows and ensure continuous improvement. 📊
-						</p>
-						<p className="text-lg">
-							📚 In addition to my technical skills, I am also committed to
-							continuous learning and professional development. 🎓 I regularly
-							attend industry conferences, participate in online courses, and
-							contribute to open-source projects. I believe that staying current
-							with the latest trends and technologies is crucial in the
-							ever-evolving field of <strong>software development</strong>. 🌱
-						</p>
-						<p className="text-lg">
-							🔥 I am always eager to expand my knowledge and judgement as I
-							contribute to my tasks, taking as much ownership as possible of
-							the projects I work on. I thrive in challenging environments and
-							am constantly seeking opportunities to grow both personally and
-							professionally. 🌟
-						</p>
-						<p className="text-lg">
-							🎮 My career spans from managing online game servers to creating
-							utility scripts and developing websites. 🛠️ I immerse myself fully
-							into the computer world, surrounding myself with technology and
-							constantly seeking to expand my knowledge and skills. 🌐
-						</p>
-						<p className="text-lg">
-							🛠️ I am always eager to expand my knowledge and judgement as I
-							contribute to my tasks, taking as much ownership as possible of
-							the projects I work on. 📈
-						</p>
+		<div className="max-w-7xl mx-auto p-6 px-4 sm:px-6 lg:px-8">
+			{/* Contenedor principal con dos columnas */}
+			<div className="md:grid md:grid-cols-2 items-center">
+				{/* Columna de información personal y redes */}
+				<div className="flex flex-col items-start space-y-4 ml-10">
+					<h1 className="text-4xl font-bold text-white">Sebastian Martini</h1>
+					<p className="text-xl text-gray-600">Full Stack Software Developer</p>
+					<p className="text-lg text-gray-500">
+						📍 Ubicación: Rosario, Argentina
+					</p>
+
+					<div className="flex space-x-2 text-white items-center mt-4">
+						<button
+							onClick={handleDownloadCV}
+							className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
+						>
+							Descargar CV
+						</button>
+						<a
+							href="https://github.com/Jimboy78"
+							className=" hover:text-gray-600"
+						>
+							<Github className="w-6 h-6" />
+						</a>
+						<a
+							href="https://www.linkedin.com/in/sebastian-martini/"
+							className=" hover:text-gray-600"
+						>
+							<Linkedin className="w-6 h-6" />
+						</a>
+						<a href="https://x.com/Jimboy_002" className=" hover:text-gray-600">
+							<X className="w-6 h-6" />
+						</a>
 					</div>
 				</div>
+
+				{/* Columna de foto de perfil */}
+				<div className="flex md:justify-center mt-8 md:mt-0 ">
+					<img
+						src="/perfil-photo.jpeg"
+						alt="Foto de Sebastian Martini"
+						className="w-60 h-60 rounded-full "
+					/>
+				</div>
 			</div>
-			<div className="md:ml-6">
-				<SoftSkills />
-				<Languages />
-				<Contact />
+
+			{/* Sección del perfil debajo */}
+			<div className="mt-8 p-8 shadow rounded-xl">
+				<h2 className="text-3xl font-semibold text-white mb-6">Perfil</h2>
+				<div className="text-white space-y-4">
+					<p className="text-lg">
+						🌟 I am a passionate <strong>Full Stack Software Developer</strong>{" "}
+						with extensive experience across various technologies and projects.
+						My career spans from managing online game servers to creating
+						utility scripts and developing websites. 💼
+					</p>
+					<p className="text-lg">
+						💻 Over the years, I have worked with a variety of programming
+						languages and frameworks, including <strong>JavaScript</strong>,{" "}
+						<strong>Python</strong>, <strong>Java</strong>, and{" "}
+						<strong>C#</strong>. 🖥️
+					</p>
+					<p className="text-lg">
+						🚀 I have successfully led multiple projects from conception to
+						deployment, often taking on the role of both developer and project
+						manager. 📈
+					</p>
+					<p className="text-lg">
+						📚 In addition to my technical skills, I am also committed to
+						continuous learning and professional development. 🎓
+					</p>
+					<p className="text-lg">
+						🔥 I am always eager to expand my knowledge and judgement as I
+						contribute to my tasks, taking as much ownership as possible of the
+						projects I work on. 🌟
+					</p>
+				</div>
 			</div>
 		</div>
 	);

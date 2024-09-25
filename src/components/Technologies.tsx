@@ -1,197 +1,168 @@
 import type React from "react";
 import {
-	Card,
-	CardContent,
-	Typography,
-	LinearProgress,
-	Box,
-} from "@mui/material";
+	FaReact,
+	FaPython,
+	FaJsSquare,
+	FaDatabase,
+	FaNodeJs,
+	FaGit,
+	FaGithub,
+} from "react-icons/fa"; // Cambiado a FaGithub
+import {
+	SiDjango,
+	SiTypescript,
+	SiCsharp,
+	SiTailwindcss,
+	SiNextdotjs,
+	SiExpress,
+	SiMongodb,
+	SiFigma,
+	SiStorybook,
+	SiFirebase,
+} from "react-icons/si";
+import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
+import Tooltip from "@mui/material/Tooltip";
+
+const skills = [
+	{
+		name: "JavaScript",
+		icon: <FaJsSquare size={40} color="#fbc02d" />,
+		color: "#fbc02d",
+	},
+	{
+		name: "TypeScript",
+		icon: <SiTypescript size={40} color="#4caf50" />,
+		color: "#4caf50",
+	},
+	{
+		name: "Tailwind CSS",
+		icon: <SiTailwindcss size={40} color="#38bdf8" />,
+		color: "#38bdf8",
+	},
+	{
+		name: "React.js",
+		icon: <FaReact size={40} color="#2196f3" />,
+		color: "#2196f3",
+	},
+	{
+		name: "React Native",
+		icon: <FaReact size={40} color="#00acc1" />,
+		color: "#00acc1",
+	},
+	{
+		name: "Vite.js",
+		icon: <FaReact size={40} color="#646cff" />, // Usando el mismo icono de React por falta de uno específico
+		color: "#646cff",
+	},
+	{
+		name: "Next.js",
+		icon: <SiNextdotjs size={40} color="ffffff" />,
+		color: "#000000",
+	},
+	{
+		name: "Express.js",
+		icon: <SiExpress size={40} color="ffffff" />, // Usando un color neutro
+		color: "#000000",
+	},
+	{
+		name: "Node.js",
+		icon: <FaNodeJs size={40} color="#8cc84b" />,
+		color: "#8cc84b",
+	},
+	{
+		name: "Python",
+		icon: <FaPython size={40} color="#3f51b5" />,
+		color: "#3f51b5",
+	},
+	{
+		name: "Flask",
+		icon: <FaPython size={40} color="ffffff" />, // Usando el mismo icono de Python
+		color: "#3f51b5",
+	},
+	{
+		name: "SQL",
+		icon: <FaDatabase size={40} color="#0288d1" />,
+		color: "#0288d1",
+	},
+	{
+		name: "MongoDB",
+		icon: <SiMongodb size={40} color="#47A248" />,
+		color: "#47A248",
+	},
+	{
+		name: "Figma",
+		icon: <SiFigma size={40} color="#F24E1E" />,
+		color: "#F24E1E",
+	},
+	{
+		name: "Storybook",
+		icon: <SiStorybook size={40} color="#FF4785" />,
+		color: "#FF4785",
+	},
+	{
+		name: "GitHub",
+		icon: <FaGithub size={40} color="ffffff" />, // Cambiado a FaGithub
+		color: "#181717",
+	},
+];
 
 const Technologies: React.FC = () => {
 	return (
-		<section className="my-2">
-			<Card
-				sx={{
-					width: "90%",
-					margin: "0 auto",
-					padding: 2,
-					backgroundColor: "#ffffff",
-					boxShadow: "0 4px 10px rgba(31, 41, 55, 0.2)",
-					borderRadius: 2,
-					overflow: "visible",
-				}}
-			>
-				<CardContent>
-					<Typography
-						variant="h5"
-						fontWeight="bold"
-						className="bg-gray-800 p-2 my-4 rounded-md text-white"
-					>
-						Technologies
-					</Typography>
-					<Box sx={{ display: "grid", gap: 3, marginY: 2 }}>
-						{/* React.js */}
-						<Box sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
-							<Typography variant="subtitle1" fontWeight="bold">
-								React.js
-							</Typography>
-							<LinearProgress
-								variant="determinate"
-								value={50}
-								sx={{
-									height: 12,
-									borderRadius: 5,
-									backgroundColor: "#e3f2fd",
-									"& .MuiLinearProgress-bar": {
-										borderRadius: 5,
-										backgroundColor: "#2196f3",
-									},
-								}}
-							/>
-						</Box>
-
-						{/* React Native */}
-						<Box sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
-							<Typography variant="subtitle1" fontWeight="bold">
-								React Native
-							</Typography>
-							<LinearProgress
-								variant="determinate"
-								value={25}
-								sx={{
-									height: 12,
-									borderRadius: 5,
-									backgroundColor: "#e0f7fa",
-									"& .MuiLinearProgress-bar": {
-										borderRadius: 5,
-										backgroundColor: "#00acc1",
-									},
-								}}
-							/>
-						</Box>
-
-						{/* TypeScript */}
-						<Box sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
-							<Typography variant="subtitle1" fontWeight="bold">
-								TypeScript
-							</Typography>
-							<LinearProgress
-								variant="determinate"
-								value={40}
-								sx={{
-									height: 12,
-									borderRadius: 5,
-									backgroundColor: "#e8f5e9",
-									"& .MuiLinearProgress-bar": {
-										borderRadius: 5,
-										backgroundColor: "#4caf50",
-									},
-								}}
-							/>
-						</Box>
-
-						{/* JavaScript */}
-						<Box sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
-							<Typography variant="subtitle1" fontWeight="bold">
-								JavaScript
-							</Typography>
-							<LinearProgress
-								variant="determinate"
-								value={37}
-								sx={{
-									height: 12,
-									borderRadius: 5,
-									backgroundColor: "#fff9c4",
-									"& .MuiLinearProgress-bar": {
-										borderRadius: 5,
-										backgroundColor: "#fbc02d",
-									},
-								}}
-							/>
-						</Box>
-
-						{/* Django */}
-						<Box sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
-							<Typography variant="subtitle1" fontWeight="bold">
-								Django
-							</Typography>
-							<LinearProgress
-								variant="determinate"
-								value={20}
-								sx={{
-									height: 12,
-									borderRadius: 5,
-									backgroundColor: "#fce4ec",
-									"& .MuiLinearProgress-bar": {
-										borderRadius: 5,
-										backgroundColor: "#d81b60",
-									},
-								}}
-							/>
-						</Box>
-
-						{/* Python */}
-						<Box sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
-							<Typography variant="subtitle1" fontWeight="bold">
-								Python
-							</Typography>
-							<LinearProgress
-								variant="determinate"
-								value={55}
-								sx={{
-									height: 12,
-									borderRadius: 5,
-									backgroundColor: "#e8eaf6",
-									"& .MuiLinearProgress-bar": {
-										borderRadius: 5,
-										backgroundColor: "#3f51b5",
-									},
-								}}
-							/>
-						</Box>
-
-						{/* C# */}
-						<Box sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
-							<Typography variant="subtitle1" fontWeight="bold">
-								C#
-							</Typography>
-							<LinearProgress
-								variant="determinate"
-								value={10}
-								sx={{
-									height: 12,
-									borderRadius: 5,
-									backgroundColor: "#fce4ec",
-									"& .MuiLinearProgress-bar": {
-										borderRadius: 5,
-										backgroundColor: "#8e24aa",
-									},
-								}}
-							/>
-						</Box>
-
-						{/* SQL */}
-						<Box sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
-							<Typography variant="subtitle1" fontWeight="bold">
-								SQL
-							</Typography>
-							<LinearProgress
-								variant="determinate"
-								value={25}
-								sx={{
-									height: 12,
-									borderRadius: 5,
-									backgroundColor: "#e3f2fd",
-									"& .MuiLinearProgress-bar": {
-										borderRadius: 5,
-										backgroundColor: "#0288d1",
-									},
-								}}
-							/>
-						</Box>
-					</Box>
-				</CardContent>
-			</Card>
+		<section
+			id="skills"
+			className="flex py-12 bg-transparent justify-center items-center"
+		>
+			<Box>
+				<h2 className="text-3xl font-bold text-center text-white mb-8">
+					My Skills
+				</h2>
+				<Grid container spacing={4} justifyContent="center">
+					{skills.map((skill, index) => (
+						<Grid
+							item
+							key={index}
+							xs={4}
+							sm={3}
+							md={2}
+							lg={1.5}
+							display="flex"
+							justifyContent="center"
+						>
+							<Tooltip title={skill.name} placement="top">
+								<Box
+									sx={{
+										p: 2,
+										display: "flex",
+										flexDirection: "column",
+										alignItems: "center",
+										cursor: "pointer",
+										backgroundColor: `${skill.color}20`, // Fondo del color del icono con opacidad
+										borderRadius: "8px", // Esquinas redondeadas
+										transition: "background-color 0.3s ease", // Transición de fondo
+										"&:hover": {
+											backgroundColor: `${skill.color}40`, // Color de fondo completo al pasar el mouse
+											boxShadow: `0px 4px 20px ${skill.color}`, // Sombra del color del icono
+										},
+									}}
+								>
+									<Box
+										component="span"
+										sx={{
+											transition: "transform 0.3s ease", // Transición de aumento
+											"&:hover": {
+												transform: "scale(1.2)", // Aumentar el tamaño del icono al hacer hover
+											},
+										}}
+									>
+										{skill.icon}
+									</Box>
+								</Box>
+							</Tooltip>
+						</Grid>
+					))}
+				</Grid>
+			</Box>
 		</section>
 	);
 };

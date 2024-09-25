@@ -3,9 +3,9 @@ import { Github, Linkedin, X } from "lucide-react";
 
 const Footer: React.FC = () => {
 	return (
-		<footer className="bg-white dark:bg-gray-800 shadow-md my-1 text-center ">
-			<div className="container mx-auto py-3 items-center">
-				<div className="flex justify-around mx-9">
+		<footer className="bg-white dark:bg-gray-800 shadow-md my-1 py-3">
+			<div className="container mx-auto flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0">
+				<div className="flex space-x-8">
 					<a
 						href="https://github.com/Jimboy78"
 						className="dark:text-white dark:hover:text-gray-600"
