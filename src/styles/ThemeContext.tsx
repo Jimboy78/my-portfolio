@@ -1,8 +1,5 @@
-/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
-/* eslint-disable @typescript-eslint/explicit-function-return-type */
-/* eslint-disable no-duplicate-imports */
 import type { ReactNode } from "react";
-import type React from "react";
+// eslint-disable-next-line no-duplicate-imports
 import { createContext, useContext, useState } from "react";
 
 type Theme = "light" | "dark";
@@ -16,10 +13,12 @@ const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export const ThemeProvider: React.FC<{ children: ReactNode }> = ({
 	children,
-}) => {
+}): JSX.Element => {
+	// Añadir tipo de retorno
 	const [theme, setTheme] = useState<Theme>("dark"); // Por defecto, el tema oscuro
 
-	const toggleTheme = () => {
+	const toggleTheme = (): void => {
+		// Añadir tipo de retorno
 		setTheme((previous) => (previous === "dark" ? "light" : "dark"));
 	};
 
@@ -31,7 +30,8 @@ export const ThemeProvider: React.FC<{ children: ReactNode }> = ({
 };
 
 // eslint-disable-next-line react-refresh/only-export-components
-export const useTheme = () => {
+export const useTheme = (): ThemeContextType => {
+	// Añadir tipo de retorno
 	const context = useContext(ThemeContext);
 	if (context === undefined) {
 		throw new Error("useTheme must be used within a ThemeProvider");

@@ -33,7 +33,8 @@
 	},
 	"include": [
 		"src",
-		"e2e"
+		"e2e",
+		"global.d.ts"
 	],
 	"references": [
 		{

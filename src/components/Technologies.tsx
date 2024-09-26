@@ -5,20 +5,16 @@ import {
 	FaJsSquare,
 	FaDatabase,
 	FaNodeJs,
-	FaGit,
 	FaGithub,
 } from "react-icons/fa"; // Cambiado a FaGithub
 import {
-	SiDjango,
 	SiTypescript,
-	SiCsharp,
 	SiTailwindcss,
 	SiNextdotjs,
 	SiExpress,
 	SiMongodb,
 	SiFigma,
 	SiStorybook,
-	SiFirebase,
 } from "react-icons/si";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";

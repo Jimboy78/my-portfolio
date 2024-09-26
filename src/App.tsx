@@ -7,16 +7,7 @@ import WorkExperience from "./components/WorkExperience";
 import PersonalExperience from "./components/PersonalExperience";
 import Education from "./components/Education";
 import Projects from "./components/Projects";
-import ContactForm from "./components/ContactForm";
-import { useTheme } from "./styles/ThemeContext";
-import {
-	FiUser,
-	FiCode,
-	FiBriefcase,
-	FiBook,
-	FiGrid,
-	FiMail,
-} from "react-icons/fi";
+import { FiUser, FiCode, FiBriefcase, FiBook, FiGrid } from "react-icons/fi";
 
 const sections = [
 	{ id: "profile", title: "Profile", component: <Profile />, icon: <FiUser /> },
@@ -50,21 +41,13 @@ const sections = [
 		component: <Projects />,
 		icon: <FiGrid />,
 	},
-	// {
-	// 	id: "contact-form",
-	// 	title: "Contact",
-	// 	component: <ContactForm />,
-	// 	icon: <FiMail />,
-	// },
 ];
 
 const App: React.FC = () => {
 	const [activeTab, setActiveTab] = useState(0);
-	const { theme } = useTheme(); // Usa el contexto de tema
-
-	const sectionRefs = useRef<Array<HTMLDivElement | null>>(
-		Array.from({ length: sections.length }).fill(null)
-	);
+	const sectionRefs = useRef<(HTMLDivElement | null)[]>(
+		Array(sections.length).fill(null)
+	); // Especificar el tipo
 
 	const handleChange = (index: number) => {
 		setActiveTab(index);
@@ -80,7 +63,8 @@ const App: React.FC = () => {
 
 		const observer = new IntersectionObserver((entries) => {
 			entries.forEach((entry) => {
-				const index = sectionRefs.current.indexOf(entry.target);
+				const target = entry.target as HTMLDivElement; // Verificar tipo
+				const index = sectionRefs.current.indexOf(target);
 				if (entry.isIntersecting) {
 					setActiveTab(index);
 				}
@@ -100,7 +84,7 @@ const App: React.FC = () => {
 
 	return (
 		<main>
-			<div className=" flex flex-col items-center md:pt-3 -0 max-w-screen-lg mx-auto">
+			<div className="flex flex-col items-center md:pt-3 -0 max-w-screen-lg mx-auto">
 				{/* Barra de navegación */}
 				<Navigation
 					activeTab={activeTab}
