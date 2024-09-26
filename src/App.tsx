@@ -50,12 +50,12 @@ const sections = [
 		component: <Projects />,
 		icon: <FiGrid />,
 	},
-	{
-		id: "contact-form",
-		title: "Contact",
-		component: <ContactForm />,
-		icon: <FiMail />,
-	},
+	// {
+	// 	id: "contact-form",
+	// 	title: "Contact",
+	// 	component: <ContactForm />,
+	// 	icon: <FiMail />,
+	// },
 ];
 
 const App: React.FC = () => {
