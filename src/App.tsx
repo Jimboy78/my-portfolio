@@ -6,8 +6,8 @@ import Technologies from "./components/Technologies";
 import WorkExperience from "./components/WorkExperience";
 import PersonalExperience from "./components/PersonalExperience";
 import Education from "./components/Education";
-import Projects from "./components/Projects";
-import { FiUser, FiCode, FiBriefcase, FiBook, FiGrid } from "react-icons/fi";
+// import Projects from "./components/Projects";
+import { FiUser, FiCode, FiBriefcase, FiBook } from "react-icons/fi";
 
 const sections = [
 	{ id: "profile", title: "Profile", component: <Profile />, icon: <FiUser /> },
@@ -35,12 +35,12 @@ const sections = [
 		component: <Education />,
 		icon: <FiBook />,
 	},
-	{
-		id: "projects",
-		title: "Projects",
-		component: <Projects />,
-		icon: <FiGrid />,
-	},
+	// {
+	// 	id: "projects",
+	// 	title: "Projects",
+	// 	component: <Projects />,
+	// 	icon: <FiGrid />,
+	// },
 ];
 
 const App: React.FC = () => {
