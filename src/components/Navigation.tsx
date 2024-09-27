@@ -1,5 +1,5 @@
-import type React from "react"; // Asegúrate de importar React
-import { useTheme } from "../styles/ThemeContext"; // Importa el hook de tema
+import type React from "react";
+import { useTheme } from "../styles/ThemeContext";
 
 interface NavigationProps {
 	activeTab: number;

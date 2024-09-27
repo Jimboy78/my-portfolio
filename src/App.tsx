@@ -6,8 +6,8 @@ import Technologies from "./components/Technologies";
 import WorkExperience from "./components/WorkExperience";
 import PersonalExperience from "./components/PersonalExperience";
 import Education from "./components/Education";
-// import Projects from "./components/Projects";
-import { FiUser, FiCode, FiBriefcase, FiBook } from "react-icons/fi";
+import ContactForm from "./components/ContactForm";
+import { FiUser, FiCode, FiBriefcase, FiBook, FiMail } from "react-icons/fi";
 
 const sections = [
 	{ id: "profile", title: "Profile", component: <Profile />, icon: <FiUser /> },
@@ -35,21 +35,21 @@ const sections = [
 		component: <Education />,
 		icon: <FiBook />,
 	},
-	// {
-	// 	id: "projects",
-	// 	title: "Projects",
-	// 	component: <Projects />,
-	// 	icon: <FiGrid />,
-	// },
+	{
+		id: "contact-form",
+		title: "Contact",
+		component: <ContactForm />,
+		icon: <FiMail />,
+	},
 ];
 
 const App: React.FC = () => {
 	const [activeTab, setActiveTab] = useState(0);
-	const sectionRefs = useRef<(HTMLDivElement | null)[]>(
-		Array(sections.length).fill(null)
-	); // Especificar el tipo
 
-	const handleChange = (index: number) => {
+	// Inicializar con un array de (HTMLDivElement | null)[] correctamente
+	const sectionRefs = useRef<Array<HTMLDivElement | null>>([]);
+
+	const handleChange = (index: number): void => {
 		setActiveTab(index);
 		sectionRefs.current[index]?.scrollIntoView({ behavior: "smooth" });
 	};
@@ -61,30 +61,35 @@ const App: React.FC = () => {
 			threshold: 0.1,
 		};
 
+		// Copia el valor actual de sectionRefs.current a una variable local
+		const currentRefs = [...sectionRefs.current];
+
 		const observer = new IntersectionObserver((entries) => {
 			entries.forEach((entry) => {
-				const target = entry.target as HTMLDivElement; // Verificar tipo
-				const index = sectionRefs.current.indexOf(target);
+				const target = entry.target as HTMLDivElement;
+				const index = currentRefs.indexOf(target);
 				if (entry.isIntersecting) {
 					setActiveTab(index);
 				}
 			});
 		}, options);
 
-		sectionRefs.current.forEach((ref) => {
+		// Observa cada uno de los elementos referenciados
+		currentRefs.forEach((ref) => {
 			if (ref) observer.observe(ref);
 		});
 
+		// Limpieza del observer
 		return () => {
-			sectionRefs.current.forEach((ref) => {
+			currentRefs.forEach((ref) => {
 				if (ref) observer.unobserve(ref);
 			});
 		};
-	}, []);
+	}, []); // Asegúrate de que no falten dependencias importantes aquí
 
 	return (
 		<main>
-			<div className="flex flex-col items-center md:pt-3 -0 max-w-screen-lg mx-auto">
+			<div className="flex flex-col items-center md:pt-3 max-w-screen-lg mx-auto">
 				{/* Barra de navegación */}
 				<Navigation
 					activeTab={activeTab}
