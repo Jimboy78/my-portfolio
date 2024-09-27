@@ -15,7 +15,7 @@
 	},
 	"license": "MIT",
 	"version": "1.0.0",
-	"type": "module",
+	"type": "commonjs",
 	"scripts": {
 		"setup": "git init && husky install && npx playwright install",
 		"format": "prettier src/**/*.{ts,tsx} --write",

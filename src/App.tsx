@@ -45,8 +45,6 @@ const sections = [
 
 const App: React.FC = () => {
 	const [activeTab, setActiveTab] = useState(0);
-
-	// Inicializar con un array de (HTMLDivElement | null)[] correctamente
 	const sectionRefs = useRef<Array<HTMLDivElement | null>>([]);
 
 	const handleChange = (index: number): void => {
@@ -57,35 +55,31 @@ const App: React.FC = () => {
 	useEffect(() => {
 		const options = {
 			root: null,
-			rootMargin: "0px",
-			threshold: 0.1,
+			rootMargin: "-100px 0px 0px 0px", // Ajustar el margen superior para compensar la barra de navegación fija
+			threshold: 0.5, // Mayor umbral para mayor precisión
 		};
 
-		// Copia el valor actual de sectionRefs.current a una variable local
 		const currentRefs = [...sectionRefs.current];
 
 		const observer = new IntersectionObserver((entries) => {
 			entries.forEach((entry) => {
-				const target = entry.target as HTMLDivElement;
-				const index = currentRefs.indexOf(target);
+				const index = currentRefs.indexOf(entry.target as HTMLDivElement);
 				if (entry.isIntersecting) {
 					setActiveTab(index);
 				}
 			});
 		}, options);
 
-		// Observa cada uno de los elementos referenciados
 		currentRefs.forEach((ref) => {
 			if (ref) observer.observe(ref);
 		});
 
-		// Limpieza del observer
 		return () => {
 			currentRefs.forEach((ref) => {
 				if (ref) observer.unobserve(ref);
 			});
 		};
-	}, []); // Asegúrate de que no falten dependencias importantes aquí
+	}, []);
 
 	return (
 		<main>
@@ -105,6 +99,7 @@ const App: React.FC = () => {
 							ref={(element) => (sectionRefs.current[index] = element)}
 							id={section.id}
 							className="md:py-5"
+							style={{ paddingTop: "80px" }} // Asegurarse de que haya espacio para la barra fija
 						>
 							{section.component}
 						</div>

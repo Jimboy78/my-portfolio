@@ -1,5 +1,5 @@
 import type React from "react";
-import { useTheme } from "../styles/ThemeContext";
+// import { useTheme } from "../styles/ThemeContext";
 
 interface NavigationProps {
 	activeTab: number;
@@ -17,7 +17,7 @@ const Navigation: React.FC<NavigationProps> = ({
 	handleChange,
 	sections,
 }) => {
-	const { theme, toggleTheme } = useTheme(); // Usa el contexto de tema
+	// const { theme, toggleTheme } = useTheme(); // Usa el contexto de tema
 
 	return (
 		<nav className="fixed z-10 bg-white shadow-md rounded-2xl ">
@@ -39,7 +39,7 @@ const Navigation: React.FC<NavigationProps> = ({
 						<span>{section.title}</span>
 					</button>
 				))}
-				{/* Theme Toggle */}
+				{/* Theme Toggle
 				<label className="flex items-center cursor-pointer mx-2">
 					<input
 						type="checkbox"
@@ -54,7 +54,7 @@ const Navigation: React.FC<NavigationProps> = ({
 							className={`w-4 h-4 bg-white rounded-full shadow-md transform transition-transform duration-300 ${theme === "light" ? "translate-x-5" : ""}`}
 						></div>
 					</div>
-				</label>
+				</label> */}
 			</div>
 
 			{/* Mobile Navigation */}
