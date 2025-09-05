@@ -730,117 +730,127 @@ ${formData.message}
 			{/* Contact Modal */}
 			{showContactModal && (
 				<div 
-					className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+					className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center overflow-hidden"
 					role="dialog"
 					aria-labelledby="contact-modal-title"
 					aria-describedby="contact-modal-description"
+					onClick={() => setShowContactModal(false)}
 				>
-					<div className="relative w-full max-w-md modal-content">
+					<div 
+						className="relative w-full max-w-md mx-4 my-8 max-h-[calc(100vh-4rem)] flex flex-col"
+						onClick={(e) => e.stopPropagation()}
+					>
 						{/* Animated background glow */}
 						<div className="absolute -inset-1 bg-gradient-to-r from-purple-600 to-pink-600 rounded-3xl blur opacity-30"></div>
 
-						<div className={`relative ${themeClasses.modalBg} backdrop-blur-xl rounded-3xl border ${theme === "dark" ? "border-white/10" : "border-gray-300/30"} p-6 md:p-8 shadow-2xl animate-fade-in`}>
-							{/* Header */}
-							<div className="flex items-center justify-between mb-6">
-								<div>
-									<h3 id="contact-modal-title" className={`text-2xl font-bold ${themeClasses.text} mb-1`}>
-										Get In Touch
-									</h3>
-									<p id="contact-modal-description" className={`${themeClasses.textSecondary} text-sm`}>
-										Send me a message and I'll get back to you!
-									</p>
+						<div className={`relative ${themeClasses.modalBg} backdrop-blur-xl rounded-3xl border ${theme === "dark" ? "border-white/10" : "border-gray-300/30"} shadow-2xl animate-fade-in flex flex-col max-h-full overflow-hidden`}>
+							{/* Header - Fixed at top */}
+							<div className="flex-shrink-0 p-4 sm:p-6 border-b border-white/10">
+								<div className="flex items-center justify-between">
+									<div>
+										<h3 id="contact-modal-title" className={`text-lg sm:text-xl font-bold ${themeClasses.text} mb-1`}>
+											Get In Touch
+										</h3>
+										<p id="contact-modal-description" className={`${themeClasses.textSecondary} text-xs sm:text-sm`}>
+											Send me a message and I'll get back to you!
+										</p>
+									</div>
+									<button
+										onClick={() => {
+											setShowContactModal(false);
+										}}
+										aria-label="Close contact form"
+										className={`p-2 rounded-xl ${theme === "dark" ? "bg-white/5 hover:bg-white/10 text-white/60 hover:text-white" : "bg-gray-100 hover:bg-gray-200 text-gray-600 hover:text-gray-900"} transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-red-500/20 flex-shrink-0`}
+									>
+										<X className="w-4 h-4 sm:w-5 sm:h-5" aria-hidden="true" />
+									</button>
 								</div>
-								<button
-									onClick={() => {
-										setShowContactModal(false);
-									}}
-									aria-label="Close contact form"
-									className="p-2 rounded-xl bg-white/5 hover:bg-white/10 text-white/60 hover:text-white transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-red-500/20"
-								>
-									<X className="w-5 h-5" aria-hidden="true" />
-								</button>
 							</div>
 
-							{/* Form */}
-							<form onSubmit={handleSubmit} className="space-y-4">
-								{/* Name */}
-								<div>
-									<label className="block text-white text-sm font-medium mb-2">
-										Name
-									</label>
-									<input
-										type="text"
-										name="name"
-										value={formData.name}
-										onChange={handleInputChange}
-										required
-										className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-white/40 focus:outline-none focus:border-purple-500/50 focus:bg-white/10 transition-all duration-300"
-										placeholder="Your full name"
-									/>
-								</div>
+							{/* Form - Scrollable content */}
+							<div className="flex-1 overflow-y-auto p-4 sm:p-6">
+								<form onSubmit={handleSubmit} className="space-y-4">
+									{/* Name */}
+									<div>
+										<label className={`block ${themeClasses.text} text-xs sm:text-sm font-medium mb-2`}>
+											Name
+										</label>
+										<input
+											type="text"
+											name="name"
+											value={formData.name}
+											onChange={handleInputChange}
+											required
+											className={`w-full px-3 sm:px-4 py-2 sm:py-3 ${theme === "dark" ? "bg-white/5 border-white/10 text-white placeholder-white/40" : "bg-white/90 border-gray-300 text-gray-900 placeholder-gray-500"} border rounded-lg sm:rounded-xl focus:outline-none focus:border-purple-500/50 ${theme === "dark" ? "focus:bg-white/10" : "focus:bg-white"} transition-all duration-300 text-sm sm:text-base`}
+											placeholder="Your full name"
+										/>
+									</div>
 
-								{/* Email */}
-								<div>
-									<label className="block text-white text-sm font-medium mb-2">
-										Email
-									</label>
-									<input
-										type="email"
-										name="email"
-										value={formData.email}
-										onChange={handleInputChange}
-										required
-										className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-white/40 focus:outline-none focus:border-purple-500/50 focus:bg-white/10 transition-all duration-300"
-										placeholder="your.email@example.com"
-									/>
-								</div>
+									{/* Email */}
+									<div>
+										<label className={`block ${themeClasses.text} text-xs sm:text-sm font-medium mb-2`}>
+											Email
+										</label>
+										<input
+											type="email"
+											name="email"
+											value={formData.email}
+											onChange={handleInputChange}
+											required
+											className={`w-full px-3 sm:px-4 py-2 sm:py-3 ${theme === "dark" ? "bg-white/5 border-white/10 text-white placeholder-white/40" : "bg-white/90 border-gray-300 text-gray-900 placeholder-gray-500"} border rounded-lg sm:rounded-xl focus:outline-none focus:border-purple-500/50 ${theme === "dark" ? "focus:bg-white/10" : "focus:bg-white"} transition-all duration-300 text-sm sm:text-base`}
+											placeholder="your.email@example.com"
+										/>
+									</div>
 
-								{/* Subject */}
-								<div>
-									<label className="block text-white text-sm font-medium mb-2">
-										Subject
-									</label>
-									<input
-										type="text"
-										name="subject"
-										value={formData.subject}
-										onChange={handleInputChange}
-										required
-										className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-white/40 focus:outline-none focus:border-purple-500/50 focus:bg-white/10 transition-all duration-300"
-										placeholder="What's this about?"
-									/>
-								</div>
+									{/* Subject */}
+									<div>
+										<label className={`block ${themeClasses.text} text-xs sm:text-sm font-medium mb-2`}>
+											Subject
+										</label>
+										<input
+											type="text"
+											name="subject"
+											value={formData.subject}
+											onChange={handleInputChange}
+											required
+											className={`w-full px-3 sm:px-4 py-2 sm:py-3 ${theme === "dark" ? "bg-white/5 border-white/10 text-white placeholder-white/40" : "bg-white/90 border-gray-300 text-gray-900 placeholder-gray-500"} border rounded-lg sm:rounded-xl focus:outline-none focus:border-purple-500/50 ${theme === "dark" ? "focus:bg-white/10" : "focus:bg-white"} transition-all duration-300 text-sm sm:text-base`}
+											placeholder="What's this about?"
+										/>
+									</div>
 
-								{/* Message */}
-								<div>
-									<label className="block text-white text-sm font-medium mb-2">
-										Message
-									</label>
-									<textarea
-										name="message"
-										value={formData.message}
-										onChange={handleInputChange}
-										required
-										rows={4}
-										className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-white/40 focus:outline-none focus:border-purple-500/50 focus:bg-white/10 transition-all duration-300 resize-none"
-										placeholder="Tell me about your project or just say hi!"
-									/>
-								</div>
+									{/* Message */}
+									<div>
+										<label className={`block ${themeClasses.text} text-xs sm:text-sm font-medium mb-2`}>
+											Message
+										</label>
+										<textarea
+											name="message"
+											value={formData.message}
+											onChange={handleInputChange}
+											required
+											rows={3}
+											className={`w-full px-3 sm:px-4 py-2 sm:py-3 ${theme === "dark" ? "bg-white/5 border-white/10 text-white placeholder-white/40" : "bg-white/90 border-gray-300 text-gray-900 placeholder-gray-500"} border rounded-lg sm:rounded-xl focus:outline-none focus:border-purple-500/50 ${theme === "dark" ? "focus:bg-white/10" : "focus:bg-white"} transition-all duration-300 resize-none text-sm sm:text-base min-h-[80px]`}
+											placeholder="Tell me about your project or just say hi!"
+										/>
+									</div>
 
-								{/* Submit Button */}
-								<button
-									type="submit"
-									className="w-full px-6 py-4 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-purple-500/25 transform hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2 focus:outline-none focus:ring-4 focus:ring-purple-500/20"
-								>
-									<Send className="w-5 h-5" aria-hidden="true" />
-									Send Message
-								</button>
-							</form>
+									{/* Submit Button */}
+									<button
+										type="submit"
+										className="w-full px-4 sm:px-6 py-3 sm:py-4 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-semibold rounded-lg sm:rounded-xl shadow-lg hover:shadow-purple-500/25 transform hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2 focus:outline-none focus:ring-4 focus:ring-purple-500/20 text-sm sm:text-base mt-6"
+									>
+										<Send className="w-4 h-4 sm:w-5 sm:h-5" aria-hidden="true" />
+										Send Message
+									</button>
+								</form>
+							</div>
 
-							{/* Footer Note */}
-							<p className="text-center text-white/40 text-xs mt-4">
-								This will open your default email client
-							</p>
+							{/* Footer Note - Fixed at bottom */}
+							<div className="flex-shrink-0 p-4 sm:p-6 border-t border-white/10">
+								<p className={`text-center ${themeClasses.textMuted} text-xs`}>
+									This will open your default email client
+								</p>
+							</div>
 						</div>
 					</div>
 				</div>

@@ -656,10 +656,10 @@ body,
 @media (max-width: 768px) {
 	/* Mejorar el modal de contacto en móviles */
 	.modal-content {
-		margin: 1rem;
-		max-width: calc(100vw - 2rem);
-		max-height: calc(100vh - 2rem);
-		overflow-y: auto;
+		margin: 0.5rem;
+		max-width: calc(100vw - 1rem);
+		max-height: calc(100vh - 1rem);
+		overflow: hidden;
 	}
 	
 	/* Cards más compactas en móvil */
@@ -683,6 +683,44 @@ body,
 	.text-white\/60,
 	.text-gray-600 {
 		opacity: 0.8;
+	}
+}
+
+/* Estilos específicos para el modal de contacto */
+.contact-modal-overlay {
+	/* Prevenir scroll del body cuando el modal esté abierto */
+	overflow: hidden;
+}
+
+.contact-modal-content {
+	/* Asegurar que el modal no cause scroll horizontal */
+	max-width: 100%;
+	box-sizing: border-box;
+}
+
+/* Mejoras para campos de formulario en móvil */
+@media (max-width: 640px) {
+	/* Asegurar que los inputs no causen overflow */
+	input, textarea {
+		font-size: 16px !important; /* Prevenir zoom en iOS */
+		box-sizing: border-box;
+		max-width: 100%;
+	}
+	
+	/* Reducir padding del modal en pantallas muy pequeñas */
+	.modal-content {
+		margin: 0.25rem;
+		max-width: calc(100vw - 0.5rem);
+		max-height: calc(100vh - 0.5rem);
+	}
+}
+
+/* Prevenir zoom en inputs en iOS */
+@supports (-webkit-touch-callout: none) {
+	input[type="text"],
+	input[type="email"],
+	textarea {
+		font-size: 16px !important;
 	}
 }
 
