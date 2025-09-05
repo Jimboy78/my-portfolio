@@ -1,42 +1,19 @@
-import { useEffect, useState, useRef, useCallback } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 const CustomCursor = (): JSX.Element => {
 	const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-	const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
 	const [isHovering, setIsHovering] = useState(false);
-	const animationRef = useRef<number>();
-	const mouseRef = useRef({ x: 0, y: 0 });
-	const cursorRef = useRef({ x: 0, y: 0 });
 
-	// Smooth cursor following with requestAnimationFrame
-	const updateCursor = useCallback((): void => {
-		const dx = mouseRef.current.x - cursorRef.current.x;
-		const dy = mouseRef.current.y - cursorRef.current.y;
-
-		cursorRef.current.x += dx * 0.12;
-		cursorRef.current.y += dy * 0.12;
-
-		setCursorPosition({
-			x: cursorRef.current.x,
-			y: cursorRef.current.y,
-		});
-
-		animationRef.current = requestAnimationFrame(updateCursor);
+	// Detect touch/coarse pointer environments
+	const isTouch = useMemo(() => {
+		if (typeof window === "undefined") return false;
+		return matchMedia("(hover: none), (pointer: coarse)").matches;
 	}, []);
 
 	useEffect(() => {
-		animationRef.current = requestAnimationFrame(updateCursor);
-		return (): void => {
-			if (animationRef.current) {
-				cancelAnimationFrame(animationRef.current);
-			}
-		};
-	}, [updateCursor]);
-
-	useEffect(() => {
+		if (isTouch) return; // skip on mobile/tablet
 		const handleMouseMove = (event: MouseEvent): void => {
 			setMousePosition({ x: event.clientX, y: event.clientY });
-			mouseRef.current = { x: event.clientX, y: event.clientY };
 		};
 
 		const handleMouseEnter = (): void => {
@@ -77,8 +54,9 @@ const CustomCursor = (): JSX.Element => {
 			cleanup();
 			observer.disconnect();
 		};
-	}, []);
+	}, [isTouch]);
 
+	if (isTouch) return <></>;
 	return (
 		<>
 			{/* Cursor dot - follows mouse directly */}
@@ -93,12 +71,12 @@ const CustomCursor = (): JSX.Element => {
 				}}
 			/>
 
-			{/* Cursor outline - follows at same speed */}
+			{/* Cursor outline - now exactly matches the dot position (no lag) */}
 			<div
 				className="cursor-outline"
 				style={{
-					left: `${cursorPosition.x}px`,
-					top: `${cursorPosition.y}px`,
+					left: `${mousePosition.x}px`,
+					top: `${mousePosition.y}px`,
 					transform: isHovering
 						? "translate(-50%, -50%) scale(1.5)"
 						: "translate(-50%, -50%)",

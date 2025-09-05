@@ -36,6 +36,11 @@
 		"e2e",
 		"global.d.ts"
 	],
+	"exclude": [
+		"src/routeTree.gen.ts",
+		"src/routes/**",
+		"src/data/personalProjects.ts"
+	],
 	"references": [
 		{
 			"path": "./tsconfig.node.json"
