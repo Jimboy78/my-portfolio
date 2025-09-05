@@ -4,7 +4,9 @@
       "Bash(npm run dev:*)",
       "Bash(pnpm install:*)",
       "Bash(npm install)",
-      "Bash(npm audit:*)"
+      "Bash(npm audit:*)",
+      "Bash(npm run build:*)",
+      "Bash(npx update-browserslist-db:*)"
     ],
     "deny": [],
     "ask": []
