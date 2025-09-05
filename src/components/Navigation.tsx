@@ -1,5 +1,4 @@
 import type React from "react";
-// import { useTheme } from "../styles/ThemeContext";
 
 interface NavigationProps {
 	activeTab: number;
@@ -9,7 +8,7 @@ interface NavigationProps {
 		title: string;
 		component: JSX.Element;
 		icon: JSX.Element;
-	}>; // Asegúrate de definir el tipo de secciones
+	}>;
 }
 
 const Navigation: React.FC<NavigationProps> = ({
@@ -17,65 +16,59 @@ const Navigation: React.FC<NavigationProps> = ({
 	handleChange,
 	sections,
 }) => {
-	// const { theme, toggleTheme } = useTheme(); // Usa el contexto de tema
-
 	return (
-		<nav className="fixed z-10 bg-white shadow-md rounded-2xl ">
+		<nav className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 animate-fade-in-down">
 			{/* Desktop Navigation */}
-			<div className=" hidden md:flex justify-center  items-center h-10">
+			<div className="hidden md:flex backdrop-blur-md bg-white/10 border border-white/20 rounded-full px-6 py-3 shadow-2xl">
 				{sections.map((section, index) => (
 					<button
 						key={section.id}
-						onClick={() => {
-							handleChange(index);
-						}}
-						className={`flex items-center space-x-1 px-4  transition-colors duration-300 ${
+						onClick={() => handleChange(index)}
+						className={`group relative flex items-center gap-2 px-4 py-2 rounded-full transition-all duration-300 ${
 							activeTab === index
-								? "text-yellow-400 font-bold  border-yellow-400"
-								: "text-gray-800 hover:text-yellow-500"
+								? "bg-gradient-to-r from-purple-600 to-blue-600 text-white shadow-lg"
+								: "text-white/80 hover:text-white hover:bg-white/10"
 						}`}
 					>
-						{section.icon}
-						<span>{section.title}</span>
+						<div className={`transition-transform duration-300 ${activeTab === index ? 'scale-110' : 'group-hover:scale-110'}`}>
+							{section.icon}
+						</div>
+						<span className="font-medium whitespace-nowrap">{section.title}</span>
+						
+						{/* Active indicator */}
+						{activeTab === index && (
+							<div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-blue-600 rounded-full blur opacity-50 animate-pulse"></div>
+						)}
 					</button>
 				))}
-				{/* Theme Toggle
-				<label className="flex items-center cursor-pointer mx-2">
-					<input
-						type="checkbox"
-						className="hidden"
-						onChange={toggleTheme}
-						checked={theme === "light"}
-					/>
-					<div
-						className={`w-10 h-5 bg-gray-400 rounded-full flex items-center p-1 transition-all duration-300 ${theme === "light" ? "bg-yellow-500" : ""}`}
-					>
-						<div
-							className={`w-4 h-4 bg-white rounded-full shadow-md transform transition-transform duration-300 ${theme === "light" ? "translate-x-5" : ""}`}
-						></div>
-					</div>
-				</label> */}
 			</div>
 
 			{/* Mobile Navigation */}
 			<div className="md:hidden">
-				<div className="fixed bottom-0 left-0 right-0 bg-white shadow-md flex justify-around items-center h-16">
-					{sections.map((section, index) => (
-						<button
-							key={section.id}
-							onClick={() => {
-								handleChange(index);
-							}}
-							className={`flex flex-col items-center justify-center w-full h-full transition-colors duration-300 ${
-								activeTab === index
-									? "text-yellow-400 font-bold"
-									: "text-gray-800"
-							}`}
-						>
-							{section.icon}
-							<span className="text-xs mt-1">{section.title}</span>
-						</button>
-					))}
+				<div className="fixed bottom-4 left-4 right-4 backdrop-blur-md bg-white/10 border border-white/20 rounded-2xl shadow-2xl">
+					<div className="flex justify-around items-center py-3">
+						{sections.map((section, index) => (
+							<button
+								key={section.id}
+								onClick={() => handleChange(index)}
+								className={`group relative flex flex-col items-center justify-center px-3 py-2 rounded-xl transition-all duration-300 ${
+									activeTab === index
+										? "bg-gradient-to-r from-purple-600 to-blue-600 text-white shadow-lg scale-110"
+										: "text-white/70 hover:text-white hover:bg-white/10"
+								}`}
+							>
+								<div className={`transition-transform duration-300 mb-1 ${activeTab === index ? 'scale-110' : 'group-hover:scale-110'}`}>
+									{section.icon}
+								</div>
+								<span className="text-xs font-medium">{section.title}</span>
+								
+								{/* Active indicator */}
+								{activeTab === index && (
+									<div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-blue-600 rounded-xl blur opacity-30 animate-pulse"></div>
+								)}
+							</button>
+						))}
+					</div>
 				</div>
 			</div>
 		</nav>
