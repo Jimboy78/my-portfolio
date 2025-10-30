@@ -1,7 +1,6 @@
 import { type ChangeEvent, type FormEvent, useState } from "react";
 import { useTheme } from "../styles/ThemeContext";
 import { useIntersectionObserver } from "../hooks/useIntersectionObserver";
-import CustomCursor from "./CustomCursor";
 
 const handleDownloadCV = (): void => {
 	const link = document.createElement("a");
@@ -123,7 +122,6 @@ ${formData.message}
 		<div
 			className={`min-h-screen ${themeClasses.background} p-4 md:p-8 relative font-inter transition-all duration-700 custom-cursor ${themeRootClass}`}
 		>
-			<CustomCursor />
 			{/* Fixed background to prevent white flash */}
 			<div className={`fixed inset-0 ${themeClasses.background} -z-20`}></div>
 			{/* Subtle Animated Background */}
@@ -168,114 +166,132 @@ ${formData.message}
 						className={`absolute inset-0 ${themeClasses.card} rounded-3xl shadow-2xl`}
 					></div>
 
-					<div className="relative p-6 md:p-8 themed-surface flex flex-col md:flex-row items-center gap-6 md:gap-8">
-						{/* Profile Image */}
-						<div className="relative flex-shrink-0">
-							<div className="absolute -inset-1 bg-gradient-to-r from-blue-500/50 to-purple-500/50 rounded-full blur opacity-75"></div>
-							<div className="relative">
-								<img
-									src="/perfil-photo.jpeg"
-									alt="Sebastian Martini"
-									className="w-28 h-28 md:w-32 md:h-32 rounded-full border-4 border-white/20 shadow-xl"
-								/>
-								<div className="absolute -bottom-1 -right-1 w-8 h-8 bg-green-500 rounded-full border-4 border-white/30"></div>
-							</div>
-						</div>
-
-						{/* Main Info */}
-						<div className="flex-1 text-center md:text-left">
-							<h1
-								className={`text-3xl sm:text-4xl md:text-5xl font-bold mb-2 ${theme === "dark" ? "bg-gradient-to-r from-white to-slate-200 bg-clip-text text-transparent" : "text-gray-900"}`}
-							>
-								Sebastian Martini
-							</h1>
-							<p className="text-lg md:text-xl text-blue-400 font-semibold mb-4">
-								Full-Stack Developer
-							</p>
-
-							{/* Contact Info */}
-							<div className="flex flex-wrap gap-2 md:gap-4 justify-center md:justify-start text-white/80 mb-6">
-								<div className="flex items-center gap-2 px-3 py-2 bg-white/5 rounded-full backdrop-blur-sm">
-									<MapPin className="w-4 h-4 text-blue-400" />
-									<span>Argentina</span>
-								</div>
-								<div className="flex items-center gap-2 px-3 py-2 bg-white/5 rounded-full backdrop-blur-sm text-sm md:text-base max-w-full">
-									<Mail className="w-4 h-4 text-slate-400" />
-									<span className="truncate">martiniseba78@gmail.com</span>
-								</div>
-								<div className="flex items-center gap-2 px-3 py-2 bg-white/5 rounded-full backdrop-blur-sm text-sm md:text-base">
-									<Phone className="w-4 h-4 text-purple-400" />
-									<span>+54 9 3402 541610</span>
-								</div>
-							</div>
-
-							{/* Description */}
-							<div className="relative p-6 bg-white/5 rounded-2xl backdrop-blur-sm border border-white/10 mb-6">
-								<p className="text-white/90 leading-relaxed">
-									Full-Stack Developer with{" "}
-									<span className="text-blue-400 font-semibold">2+ years</span>{" "}
-									building end-to-end products. Currently leading ERP and IPTV
-									applications with{" "}
-									<span className="text-slate-300 font-semibold">
-										Next.js/React/Node.js
-									</span>{" "}
-									stack, focusing on performance optimization and DevOps
-									automation.
+					<div className="relative p-6 md:p-8 themed-surface">
+						<div className="grid grid-cols-1 lg:grid-cols-[1fr_auto_auto] gap-6 lg:gap-8 items-center">
+							{/* Left: Main Info */}
+							<div className="text-center lg:text-left order-2 lg:order-1">
+								<h1
+									className={`text-3xl sm:text-4xl md:text-5xl font-bold mb-2 ${theme === "dark" ? "bg-gradient-to-r from-white to-slate-200 bg-clip-text text-transparent" : "text-gray-900"}`}
+								>
+									Sebastian Martini
+								</h1>
+								<p className="text-lg md:text-xl text-blue-400 font-semibold mb-4">
+									Full-Stack Developer
 								</p>
+
+								{/* Contact Info */}
+								<div className="flex flex-wrap gap-2 md:gap-3 justify-center lg:justify-start text-white/80">
+									<div className="flex items-center gap-2 px-3 py-2 bg-white/5 rounded-full backdrop-blur-sm text-sm">
+										<MapPin className="w-4 h-4 text-blue-400" />
+										<span>Argentina</span>
+									</div>
+									<div className="flex items-center gap-2 px-3 py-2 bg-white/5 rounded-full backdrop-blur-sm text-sm max-w-full">
+										<Mail className="w-4 h-4 text-slate-400" />
+										<span className="truncate">martiniseba78@gmail.com</span>
+									</div>
+									<div className="flex items-center gap-2 px-3 py-2 bg-white/5 rounded-full backdrop-blur-sm text-sm">
+										<Phone className="w-4 h-4 text-purple-400" />
+										<span>+54 9 3402 541610</span>
+									</div>
+								</div>
+							</div>
+
+							{/* Center: Profile Image */}
+							<div className="relative flex-shrink-0 order-1 lg:order-2 mx-auto lg:mx-0">
+								<div className="absolute -inset-1 bg-gradient-to-r from-blue-500/50 to-purple-500/50 rounded-full blur opacity-75"></div>
+								<div className="relative">
+									<img
+										src="/perfil-photo.jpeg"
+										alt="Sebastian Martini"
+										className="w-32 h-32 md:w-40 md:h-40 rounded-full border-4 border-white/20 shadow-xl object-cover"
+									/>
+									<div className="absolute -bottom-1 -right-1 w-8 h-8 bg-green-500 rounded-full border-4 border-white/30"></div>
+								</div>
+							</div>
+
+							{/* Right: Actions */}
+							<div className="flex flex-col gap-4 flex-shrink-0 order-3">
+								<a
+									href="#projects"
+									aria-label="View featured projects"
+									className="group relative w-full md:w-auto px-6 py-3 bg-gradient-to-r from-emerald-600 to-teal-600 rounded-2xl text-white font-semibold shadow-lg hover:shadow-emerald-500/25 enhanced-hover transition-all duration-300 overflow-hidden focus:outline-none focus:ring-4 focus:ring-emerald-500/20"
+								>
+									<div className="flex items-center gap-2 relative z-10">
+										<Trophy className="w-5 h-5 group-hover:scale-110 transition-transform" aria-hidden="true" />
+										View Projects
+									</div>
+									{/* Shimmer effect */}
+									<div className="absolute inset-0 -z-10 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
+								</a>
+
+								<button
+									onClick={handleDownloadCV}
+									aria-label="Download Sebastian Martini's resume as PDF"
+									className="group relative w-full md:w-auto px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl text-white font-semibold shadow-lg hover:shadow-blue-500/25 enhanced-hover transition-all duration-300 overflow-hidden focus:outline-none focus:ring-4 focus:ring-blue-500/20"
+								>
+									<div className="flex items-center gap-2 relative z-10">
+										<Download className="w-5 h-5 group-hover:rotate-12 transition-transform" aria-hidden="true" />
+										Download Resume
+									</div>
+									{/* Shimmer effect */}
+									<div className="absolute inset-0 -z-10 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
+								</button>
+
+								<button
+									onClick={() => {
+										setShowContactModal(true);
+									}}
+									aria-label="Open contact form modal"
+									className="group relative w-full md:w-auto px-6 py-3 bg-gradient-to-r from-purple-600 to-pink-600 rounded-2xl text-white font-semibold shadow-lg hover:shadow-purple-500/25 enhanced-hover transition-all duration-300 overflow-hidden focus:outline-none focus:ring-4 focus:ring-purple-500/20"
+								>
+									<div className="flex items-center gap-2 relative z-10">
+										<MessageSquare className="w-5 h-5 group-hover:rotate-12 transition-transform" aria-hidden="true" />
+										Contact Me
+									</div>
+									{/* Shimmer effect */}
+									<div className="absolute inset-0 -z-10 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
+								</button>
+
+								<div className="flex gap-3 justify-center">
+									<a
+										href="https://github.com/Jimboy78"
+										target="_blank"
+										rel="noopener noreferrer"
+										aria-label="View Sebastian Martini's GitHub profile"
+										className="p-3 bg-white/10 backdrop-blur-sm rounded-xl text-white hover:bg-white/15 transition-all duration-300 border border-white/10 focus:outline-none focus:ring-4 focus:ring-gray-500/20"
+									>
+										<Github className="w-5 h-5" aria-hidden="true" />
+									</a>
+									<a
+										href="https://www.linkedin.com/in/sebastian-martini/"
+										target="_blank"
+										rel="noopener noreferrer"
+										aria-label="View Sebastian Martini's LinkedIn profile"
+										className="p-3 bg-white/10 backdrop-blur-sm rounded-xl text-white hover:bg-white/15 transition-all duration-300 border border-white/10 focus:outline-none focus:ring-4 focus:ring-blue-500/20"
+									>
+										<Linkedin className="w-5 h-5" aria-hidden="true" />
+									</a>
+								</div>
 							</div>
 						</div>
+					</div>
+				</div>
 
-						{/* Actions */}
-						<div className="flex flex-col gap-4 flex-shrink-0">
-							<button
-								onClick={handleDownloadCV}
-								aria-label="Download Sebastian Martini's resume as PDF"
-								className="group relative w-full md:w-auto px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl text-white font-semibold shadow-lg hover:shadow-blue-500/25 enhanced-hover transition-all duration-300 overflow-hidden focus:outline-none focus:ring-4 focus:ring-blue-500/20"
-							>
-								<div className="flex items-center gap-2 relative z-10">
-									<Download className="w-5 h-5 group-hover:rotate-12 transition-transform" aria-hidden="true" />
-									Download Resume
-								</div>
-								{/* Shimmer effect */}
-								<div className="absolute inset-0 -z-10 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
-							</button>
-
-							<button
-								onClick={() => {
-									setShowContactModal(true);
-								}}
-								aria-label="Open contact form modal"
-								className="group relative w-full md:w-auto px-6 py-3 bg-gradient-to-r from-purple-600 to-pink-600 rounded-2xl text-white font-semibold shadow-lg hover:shadow-purple-500/25 enhanced-hover transition-all duration-300 overflow-hidden focus:outline-none focus:ring-4 focus:ring-purple-500/20"
-							>
-								<div className="flex items-center gap-2 relative z-10">
-									<MessageSquare className="w-5 h-5 group-hover:rotate-12 transition-transform" aria-hidden="true" />
-									Contact Me
-								</div>
-								{/* Shimmer effect */}
-								<div className="absolute inset-0 -z-10 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
-							</button>
-
-							<div className="flex gap-3 justify-center">
-								<a
-									href="https://github.com/Jimboy78"
-									target="_blank"
-									rel="noopener noreferrer"
-									aria-label="View Sebastian Martini's GitHub profile"
-									className="p-3 bg-white/10 backdrop-blur-sm rounded-xl text-white hover:bg-white/15 transition-all duration-300 border border-white/10 focus:outline-none focus:ring-4 focus:ring-gray-500/20"
-								>
-									<Github className="w-5 h-5" aria-hidden="true" />
-								</a>
-								<a
-									href="https://www.linkedin.com/in/sebastian-martini/"
-									target="_blank"
-									rel="noopener noreferrer"
-									aria-label="View Sebastian Martini's LinkedIn profile"
-									className="p-3 bg-white/10 backdrop-blur-sm rounded-xl text-white hover:bg-white/15 transition-all duration-300 border border-white/10 focus:outline-none focus:ring-4 focus:ring-blue-500/20"
-								>
-									<Linkedin className="w-5 h-5" aria-hidden="true" />
-								</a>
-							</div>
-						</div>
+				{/* Description Section */}
+				<div className="relative mb-8">
+					<div className="absolute inset-0 bg-white/5 backdrop-blur-xl rounded-3xl border border-white/10 shadow-2xl"></div>
+					<div className="relative p-6 bg-white/5 rounded-2xl backdrop-blur-sm border border-white/10">
+						<p className={`leading-relaxed ${theme === "dark" ? "text-white/90" : "text-gray-700"}`}>
+							Full-Stack Developer with{" "}
+							<span className="text-blue-400 font-semibold">2+ years</span>{" "}
+							building end-to-end products. Currently leading ERP and IPTV
+							applications with{" "}
+							<span className={`font-semibold ${theme === "dark" ? "text-slate-300" : "text-gray-900"}`}>
+								Next.js/React/Node.js
+							</span>{" "}
+							stack, focusing on performance optimization and DevOps
+							automation.
+						</p>
 					</div>
 				</div>
 

@@ -1,0 +1,10 @@
+# Assets folder for IPTV Mobile Project
+
+Place your project assets here:
+- demo.mp4 (hero video)
+- screenshot1.png
+- screenshot2.png
+- architecture-diagram.png
+- etc.
+
+Update the metadata.ts file to reference these assets.

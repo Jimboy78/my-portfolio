@@ -293,22 +293,7 @@ body {
 	transform: translateX(0);
 }
 
-/* Custom cursor */
-.custom-cursor {
-	cursor: none;
-}
-
-/* Hide default cursor on all interactive elements */
-button,
-a,
-[role="button"],
-input,
-textarea,
-select,
-.cursor-pointer {
-	cursor: none !important;
-}
-
+/* Custom cursor elements */
 .cursor-dot {
 	position: fixed;
 	width: 8px;
@@ -340,18 +325,6 @@ select,
 	.cursor-dot,
 	.cursor-outline {
 		display: none !important;
-	}
-	.custom-cursor {
-		cursor: auto;
-	}
-	button,
-	a,
-	[role="button"],
-	input,
-	textarea,
-	select,
-	.cursor-pointer {
-		cursor: auto !important;
 	}
 }
 

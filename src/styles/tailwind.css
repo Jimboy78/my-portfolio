@@ -2,6 +2,20 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Global cursor styles - Apply custom cursor everywhere */
+body,
+body * {
+	cursor: none !important;
+}
+
+/* Restore default cursor on touch/mobile devices */
+@media (hover: none), (pointer: coarse) {
+	body,
+	body * {
+		cursor: auto !important;
+	}
+}
+
 /* Theme overrides */
 :root,
 .light-theme {
