@@ -7,6 +7,7 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 src/projects/aventraly/assets/Naruto-song-generation-long.mp4
+src/projects/aventraly/assets/Naruto-song-generation.mp4
 node_modules
 dist
 dist-ssr
