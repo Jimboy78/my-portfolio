@@ -256,7 +256,7 @@ ${formData.message}
 								<a
 									href="#projects"
 									aria-label="View featured projects"
-									className="group relative w-full md:w-auto px-6 py-3 bg-gradient-to-r from-emerald-600 to-teal-600 rounded-2xl text-white font-semibold shadow-lg hover:shadow-emerald-500/25 enhanced-hover transition-all duration-300 overflow-hidden focus:outline-none focus:ring-4 focus:ring-emerald-500/20"
+									className="group relative w-full md:w-auto px-6 py-3 bg-gradient-to-r from-emerald-600 to-teal-600 rounded-2xl text-white font-semibold shadow-lg hover:shadow-emerald-500/25 enhanced-hover transition-all duration-300 overflow-hidden focus:outline-none focus:ring-4 focus:ring-emerald-500/20 animate-breathing-glow"
 								>
 									<div className="flex items-center gap-2 relative z-10">
 										<Trophy
