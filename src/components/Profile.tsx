@@ -108,7 +108,7 @@ const Profile: React.FC = () => {
 						</h2>
 						<div className="prose prose-lg max-w-none text-white/90 leading-relaxed">
 							<p className="text-xl mb-6 animate-fade-in">
-								Full-Stack Developer with <span className="text-transparent bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text font-semibold">2+ years</span> building end-to-end products. Currently leading a Next.js/Node/Prisma/MySQL ERP and two IPTV apps: Mobile (Expo/React Native iOS/Android) and TV (Android TV/tvOS + Web), with CI/CD (Drone CI + Gitea → Portainer) and Docker.
+								Full-Stack Developer with <span className="text-transparent bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text font-semibold">3+ years</span> building end-to-end products. Currently leading a Next.js/Node/Prisma/MySQL ERP and two IPTV apps: Mobile (Expo/React Native iOS/Android) and TV (Android TV/tvOS + Web), with CI/CD (Drone CI + Gitea → Portainer) and Docker.
 							</p>
 							<p className="text-lg mb-6 animate-fade-in animation-delay-200">
 								Focused on <span className="text-yellow-400 font-semibold">performance</span>, <span className="text-blue-400 font-semibold">developer experience</span>, and <span className="text-green-400 font-semibold">best practices</span> (i18n, caching, observability). I thrive on measurable impact and full ownership.

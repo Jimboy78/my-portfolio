@@ -624,7 +624,7 @@ ${formData.message}
 									{[
 										{
 											label: "Years of Experience",
-											value: "2+",
+											value: "3+",
 											color: "from-blue-400 to-blue-600",
 										},
 										{
@@ -639,7 +639,7 @@ ${formData.message}
 										},
 										{
 											label: "Certifications",
-											value: "6",
+											value: "5",
 											color: "from-indigo-400 to-indigo-600",
 										},
 									].map((stat, index) => (

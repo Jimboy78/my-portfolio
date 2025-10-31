@@ -4,7 +4,6 @@ import {
 	Trophy,
 	Award,
 	Zap,
-	Target,
 	type LucideIcon,
 } from "lucide-react";
 
@@ -33,7 +32,7 @@ export const skills: Skills = {
 		color: "from-purple-500 to-purple-600",
 	},
 	Database: {
-		techs: ["MySQL", "MongoDB", "SQL"],
+		techs: ["MySQL", "PostgreSQL", "MongoDB"],
 		icon: Award,
 		color: "from-indigo-500 to-indigo-600",
 	},
@@ -41,10 +40,5 @@ export const skills: Skills = {
 		techs: ["Docker", "Drone CI", "Gitea", "Portainer"],
 		icon: Zap,
 		color: "from-gray-500 to-gray-600",
-	},
-	Practices: {
-		techs: ["i18n", "SSR", "Caching", "a11y", "CI/CD"],
-		icon: Target,
-		color: "from-slate-500 to-slate-600",
 	},
 };

@@ -17,15 +17,17 @@ export const workExperience: Array<Experience> = [
 		period: "Jan 2025 – Present",
 		current: true,
 		description:
-			"Led development of production IPTV streaming platform (mobile + TV) from zero to deployment. Previously built ERP foundation with modern stack.",
+			"Leading development of multiple production systems: IPTV Mobile App (July 2025 - Present), IPTV TV App (August 2025 - Present), and ERP System (January 2025 - Present).",
 		highlights: [
-			"Architected and built complete IPTV streaming application from scratch with 100% ownership of UI/UX design, technical decisions, and implementation",
+			"IPTV Mobile App (July 2025 - Present): Architected and built complete IPTV streaming application from scratch with zero prior codebase, handling 100% of UI/UX design, technical decisions, and implementation",
 			"Fixed critical production bugs in expo-video library for PiP/fullscreen transitions - debugged dependency source code and implemented custom patches",
 			"Engineered two-tier caching system reducing API calls 60% and optimized performance with FlashList (5x faster rendering), lazy loading, and persistent video architecture",
-			"Deployed to 1000+ users in live city event with zero crashes",
-			"Building companion TV application (Android TV/tvOS) with focus-based navigation and DPAD controls, sharing 80% of codebase with mobile app",
-			"Initiated full-stack ERP with SSR architecture, RBAC, and domain-driven design (paused for IPTV priority)",
+			"Deployed to 1000+ users in live city events with zero crashes",
+			"IPTV TV App (August 2025 - Present): Building companion TV applications with focus-based navigation and DPAD controls, sharing 80% of the codebase with mobile apps",
+			"Implemented adaptive 10-foot UI with unified state management across platforms",
+			"ERP System (January 2025 - Present): Initiated full-stack ERP with SSR architecture, RBAC, and domain-driven design",
 			"Set up production-ready CI/CD pipeline: Drone CI + Gitea + Portainer with Docker multi-stage builds",
+			"Implemented i18n (next-intl) supporting 3 languages with extensible architecture",
 		],
 		achievements: [
 			"1000+ active users deployed in production with zero crashes at launch",
@@ -35,9 +37,10 @@ export const workExperience: Array<Experience> = [
 			"Fixed critical bugs in expo-video open-source library",
 		],
 		tech: [
-			"React Native",
+			"React Native 0.79",
 			"Expo SDK 53",
 			"TypeScript",
+			"expo-router",
 			"expo-video",
 			"Next.js",
 			"Node.js",
@@ -45,13 +48,15 @@ export const workExperience: Array<Experience> = [
 			"Prisma",
 			"MySQL",
 			"Docker",
+			"Drone CI",
+			"EAS Build",
 		],
 		color: "from-blue-600 to-purple-700",
 	},
 	{
 		position: "Frontend Developer",
 		company: "Clak",
-		period: "Mar 2024 - Aug 2024",
+		period: "Mar 2024 - Dec 2024",
 		current: false,
 		description:
 			"Contributed to an innovative no-code platform similar to Retool.com, focusing on user experience and AI-powered tool creation.",
@@ -82,7 +87,7 @@ export const workExperience: Array<Experience> = [
 	{
 		position: "Software Developer",
 		company: "Junco Films",
-		period: "Jan 2024 - Feb 2024",
+		period: "Oct 2023 - Feb 2024",
 		current: false,
 		description:
 			"Developed interactive tools and web applications for content production workflows, specializing in social media integration and automation.",
@@ -114,6 +119,8 @@ export const workExperience: Array<Experience> = [
 			"Optimized MongoDB database performance to efficiently handle large-scale datasets with complex querying requirements",
 			"Built scalable backend architecture using Python and Flask framework for high-availability data processing services",
 			"Implemented data validation and quality assurance processes ensuring accuracy and reliability of processed information",
+			"Automated data extraction pipelines processing 50+ government portals daily, reducing manual data collection time by 80% and ensuring real-time data availability",
+			"Built RESTful API endpoints with Flask serving processed procurement data to multiple client applications, implementing authentication and rate limiting for secure access",
 		],
 		achievements: [
 			"Processed millions of procurement records with 99.9% accuracy",

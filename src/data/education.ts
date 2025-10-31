@@ -2,7 +2,7 @@ export interface EducationItem {
 	title: string;
 	institution: string;
 	year: string;
-	type: "degree" | "certifications";
+	type: "degree" | "certifications" | "technical";
 	details?: Array<string>;
 }
 
@@ -24,6 +24,18 @@ export const education: Array<EducationItem> = [
 			"React.js & Frontend",
 			"JavaScript Fundamentals",
 			"Python & Django",
+		],
+	},
+	{
+		title: "Electronics Specialization",
+		institution: "Technical High School",
+		year: "2013–2018",
+		type: "technical",
+		details: [
+			"Microcontroller Programming",
+			"Assembly Language (ASM)",
+			"Arduino Development",
+			"Electronics & Circuit Design",
 		],
 	},
 ];
