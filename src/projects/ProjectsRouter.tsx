@@ -32,7 +32,7 @@ const ProjectsRouter: React.FC = () => {
 	};
 
 	const handleBackToGallery = () => {
-		window.location.hash = "";
+		window.location.hash = "projects";
 	};
 
 	// Show project detail if one is selected

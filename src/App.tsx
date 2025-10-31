@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import ResumeLayout from "./components/ResumeLayout";
 import ProjectsRouter from "./projects/ProjectsRouter";
-import CustomCursor from "./components/CustomCursor";
 
 const App: React.FC = () => {
 	const [currentView, setCurrentView] = useState<"home" | "projects">("home");
@@ -26,12 +25,7 @@ const App: React.FC = () => {
 	}, []);
 
 	// Render current view
-	return (
-		<>
-			<CustomCursor />
-			{currentView === "projects" ? <ProjectsRouter /> : <ResumeLayout />}
-		</>
-	);
+	return currentView === "projects" ? <ProjectsRouter /> : <ResumeLayout />;
 };
 
 export default App;

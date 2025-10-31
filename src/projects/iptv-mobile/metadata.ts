@@ -14,7 +14,7 @@ import settingsScreen from "./assets/Settings.jpg";
 export const iptvMetadata: ProjectMetadata = {
 	id: "iptv-mobile",
 	title: "IPTV Streaming Platform",
-	subtitle: "Production mobile + TV app serving 500+ users",
+	subtitle: "Production mobile + TV app serving 1000+ users",
 	period: "July 2025 - Present",
 	status: "production",
 
@@ -23,12 +23,12 @@ export const iptvMetadata: ProjectMetadata = {
 	heroVideo: previewVideo,
 	heroImage: homeScreen,
 	description:
-		"Built complete IPTV streaming application from scratch with 100% ownership of architecture, UI/UX design, and technical decisions. Deployed to 500+ users in live city event with zero crashes.",
+		"Built complete IPTV streaming application from scratch with 100% ownership of architecture, UI/UX design, and technical decisions. Deployed to 1000+ users in live city event with zero crashes.",
 
 	// Stats
 	stats: [
 		{
-			value: "500+",
+			value: "1000+",
 			label: "Active Users",
 			icon: Users,
 		},
@@ -62,7 +62,7 @@ export const iptvMetadata: ProjectMetadata = {
 	],
 
 	result:
-		"Successfully deployed to 500+ users in live city event with zero crashes. Achieved 60% reduction in API calls through intelligent caching and 5x performance improvement in list rendering.",
+		"Successfully deployed to 1000+ users in live city event with zero crashes. Achieved 60% reduction in API calls through intelligent caching and 5x performance improvement in list rendering.",
 
 	// Technical highlights
 	highlights: [
@@ -113,12 +113,14 @@ const CacheService = {
 		{
 			src: loginScreen,
 			alt: "IPTV Mobile App - Login Screen",
-			caption: "Secure authentication with user credentials and server configuration",
+			caption:
+				"Secure authentication with user credentials and server configuration",
 		},
 		{
 			src: homeScreen,
 			alt: "IPTV Mobile App - Home Screen",
-			caption: "Main interface with live channels grid and quick access navigation",
+			caption:
+				"Main interface with live channels grid and quick access navigation",
 		},
 		{
 			src: categoriesScreen,

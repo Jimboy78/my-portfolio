@@ -17,7 +17,6 @@ import {
 	Phone,
 	Github,
 	Linkedin,
-	Award,
 	GraduationCap,
 	ChevronRight,
 	Star,
@@ -35,16 +34,13 @@ import {
 } from "lucide-react";
 import { workExperience } from "../data/experience";
 import { skills, type SkillCategory } from "../data/skills.ts";
-import { personalProjects } from "../data/personal-projects";
 import { education } from "../data/education.ts";
 
 const ResumeLayout: React.FC = () => {
 	const { theme, toggleTheme } = useTheme();
 	const [selectedExperience, setSelectedExperience] = useState(-1); // -1 means all closed
-	const [showPersonalProjects, setShowPersonalProjects] = useState(false);
 	const [expandedSkills, setExpandedSkills] = useState<Array<string>>([]);
 	const [showContactModal, setShowContactModal] = useState(false);
-	// const [scrollY, setScrollY] = useState(0); // Removed unused scroll tracking
 	const [formData, setFormData] = useState({
 		name: "",
 		email: "",
@@ -120,7 +116,7 @@ ${formData.message}
 
 	return (
 		<div
-			className={`min-h-screen ${themeClasses.background} p-4 md:p-8 relative font-inter transition-all duration-700 custom-cursor ${themeRootClass}`}
+			className={`min-h-screen ${themeClasses.background} p-4 md:p-8 relative font-inter transition-all duration-700 ${themeRootClass}`}
 		>
 			{/* Fixed background to prevent white flash */}
 			<div className={`fixed inset-0 ${themeClasses.background} -z-20`}></div>
@@ -180,7 +176,7 @@ ${formData.message}
 								</p>
 
 								{/* Contact Info */}
-								<div className="flex flex-wrap gap-2 md:gap-3 justify-center lg:justify-start text-white/80">
+								<div className="flex flex-wrap gap-2 md:gap-3 justify-center lg:justify-start text-white/80 mb-5">
 									<div className="flex items-center gap-2 px-3 py-2 bg-white/5 rounded-full backdrop-blur-sm text-sm">
 										<MapPin className="w-4 h-4 text-blue-400" />
 										<span>Argentina</span>
@@ -193,6 +189,52 @@ ${formData.message}
 										<Phone className="w-4 h-4 text-purple-400" />
 										<span>+54 9 3402 541610</span>
 									</div>
+								</div>
+
+								{/* Professional Summary */}
+								<div
+									className={`text-sm md:text-base leading-relaxed ${theme === "dark" ? "text-white/80" : "text-gray-700"} text-center lg:text-left`}
+								>
+									<p>
+										Full-Stack Developer with{" "}
+										<span className="text-blue-400 font-semibold">
+											3+ years
+										</span>{" "}
+										building end-to-end products. Led development of production{" "}
+										<span
+											className={`font-semibold ${theme === "dark" ? "text-slate-300" : "text-gray-900"}`}
+										>
+											IPTV streaming platform
+										</span>{" "}
+										(mobile + TV) from zero to deployment with{" "}
+										<span className="text-emerald-400 font-semibold">
+											1000+ users
+										</span>
+										, complete ownership of architecture, UI/UX, and technical
+										decisions.
+									</p>
+									<p className="mt-3">
+										Previously built{" "}
+										<span
+											className={`font-semibold ${theme === "dark" ? "text-slate-300" : "text-gray-900"}`}
+										>
+											ERP foundation
+										</span>{" "}
+										and{" "}
+										<span
+											className={`font-semibold ${theme === "dark" ? "text-slate-300" : "text-gray-900"}`}
+										>
+											web scraping systems
+										</span>{" "}
+										for international procurement data. Adaptable to any
+										technical challenge—comfortable diving into unfamiliar
+										territory and delivering results independently.
+									</p>
+									<p className="mt-3">
+										<span className="text-purple-400 font-semibold">
+											Seeking backend, frontend, mobile, or fullstack roles.
+										</span>
+									</p>
 								</div>
 							</div>
 
@@ -217,7 +259,10 @@ ${formData.message}
 									className="group relative w-full md:w-auto px-6 py-3 bg-gradient-to-r from-emerald-600 to-teal-600 rounded-2xl text-white font-semibold shadow-lg hover:shadow-emerald-500/25 enhanced-hover transition-all duration-300 overflow-hidden focus:outline-none focus:ring-4 focus:ring-emerald-500/20"
 								>
 									<div className="flex items-center gap-2 relative z-10">
-										<Trophy className="w-5 h-5 group-hover:scale-110 transition-transform" aria-hidden="true" />
+										<Trophy
+											className="w-5 h-5 group-hover:scale-110 transition-transform"
+											aria-hidden="true"
+										/>
 										View Projects
 									</div>
 									{/* Shimmer effect */}
@@ -230,7 +275,10 @@ ${formData.message}
 									className="group relative w-full md:w-auto px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl text-white font-semibold shadow-lg hover:shadow-blue-500/25 enhanced-hover transition-all duration-300 overflow-hidden focus:outline-none focus:ring-4 focus:ring-blue-500/20"
 								>
 									<div className="flex items-center gap-2 relative z-10">
-										<Download className="w-5 h-5 group-hover:rotate-12 transition-transform" aria-hidden="true" />
+										<Download
+											className="w-5 h-5 group-hover:rotate-12 transition-transform"
+											aria-hidden="true"
+										/>
 										Download Resume
 									</div>
 									{/* Shimmer effect */}
@@ -245,7 +293,10 @@ ${formData.message}
 									className="group relative w-full md:w-auto px-6 py-3 bg-gradient-to-r from-purple-600 to-pink-600 rounded-2xl text-white font-semibold shadow-lg hover:shadow-purple-500/25 enhanced-hover transition-all duration-300 overflow-hidden focus:outline-none focus:ring-4 focus:ring-purple-500/20"
 								>
 									<div className="flex items-center gap-2 relative z-10">
-										<MessageSquare className="w-5 h-5 group-hover:rotate-12 transition-transform" aria-hidden="true" />
+										<MessageSquare
+											className="w-5 h-5 group-hover:rotate-12 transition-transform"
+											aria-hidden="true"
+										/>
 										Contact Me
 									</div>
 									{/* Shimmer effect */}
@@ -274,24 +325,6 @@ ${formData.message}
 								</div>
 							</div>
 						</div>
-					</div>
-				</div>
-
-				{/* Description Section */}
-				<div className="relative mb-8">
-					<div className="absolute inset-0 bg-white/5 backdrop-blur-xl rounded-3xl border border-white/10 shadow-2xl"></div>
-					<div className="relative p-6 bg-white/5 rounded-2xl backdrop-blur-sm border border-white/10">
-						<p className={`leading-relaxed ${theme === "dark" ? "text-white/90" : "text-gray-700"}`}>
-							Full-Stack Developer with{" "}
-							<span className="text-blue-400 font-semibold">2+ years</span>{" "}
-							building end-to-end products. Currently leading ERP and IPTV
-							applications with{" "}
-							<span className={`font-semibold ${theme === "dark" ? "text-slate-300" : "text-gray-900"}`}>
-								Next.js/React/Node.js
-							</span>{" "}
-							stack, focusing on performance optimization and DevOps
-							automation.
-						</p>
 					</div>
 				</div>
 
@@ -514,77 +547,6 @@ ${formData.message}
 								</div>
 							</div>
 						</div>
-
-						{/* Personal Projects - Expandable */}
-						<div className="relative">
-							<div className="absolute inset-0 bg-white/5 backdrop-blur-xl rounded-3xl border border-white/10 shadow-2xl"></div>
-							<div className="relative p-6 md:p-8 themed-surface">
-								<button
-									onClick={() => {
-										setShowPersonalProjects(!showPersonalProjects);
-									}}
-									className="flex items-center justify-between w-full mb-6 hover:bg-white/5 p-4 rounded-2xl transition-all duration-300"
-								>
-									<div className="flex items-center gap-4">
-										<div className="p-3 bg-gradient-to-r from-purple-600 to-purple-700 rounded-xl">
-											<Trophy className="w-6 h-6 text-white" />
-										</div>
-										<div className="text-left">
-											<h2 className="text-2xl font-bold text-white">
-												Personal Projects
-											</h2>
-											<p className="text-white/60">
-												Side projects and achievements
-											</p>
-										</div>
-									</div>
-									<ChevronDown
-										className={`w-5 h-5 text-white/60 transition-transform ${showPersonalProjects ? "rotate-180" : ""}`}
-									/>
-								</button>
-
-								{showPersonalProjects && (
-									<div className="space-y-6 animate-fade-in">
-										{personalProjects.map((project, index) => {
-											const IconComponent = project.icon;
-											return (
-												<div
-													key={index}
-													className="p-6 rounded-2xl border border-white/10 hover:border-white/20 transition-all duration-300 bg-white/5 hover:bg-white/10"
-												>
-													<div className="flex items-start gap-6">
-														<div
-															className={`p-3 rounded-xl bg-gradient-to-br ${project.color} flex-shrink-0`}
-														>
-															<IconComponent className="w-6 h-6 text-white" />
-														</div>
-														<div className="flex-1">
-															<div className="flex items-start justify-between mb-3">
-																<h3 className="text-lg font-semibold text-white">
-																	{project.title}
-																</h3>
-																<span className="text-white/60 text-sm bg-white/10 px-3 py-1 rounded-full">
-																	{project.period}
-																</span>
-															</div>
-															<p className="text-white/70 mb-4 leading-relaxed">
-																{project.description}
-															</p>
-															<div
-																className={`inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r ${project.color} text-white text-sm rounded-full font-medium`}
-															>
-																<Award className="w-4 h-4" />
-																{project.achievement}
-															</div>
-														</div>
-													</div>
-												</div>
-											);
-										})}
-									</div>
-								)}
-							</div>
-						</div>
 					</div>
 
 					{/* Right Column - Education & Stats */}
@@ -745,29 +707,37 @@ ${formData.message}
 
 			{/* Contact Modal */}
 			{showContactModal && (
-				<div 
+				<div
 					className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center overflow-hidden"
 					role="dialog"
 					aria-labelledby="contact-modal-title"
 					aria-describedby="contact-modal-description"
 					onClick={() => setShowContactModal(false)}
 				>
-					<div 
+					<div
 						className="relative w-full max-w-md mx-4 my-8 max-h-[calc(100vh-4rem)] flex flex-col"
 						onClick={(e) => e.stopPropagation()}
 					>
 						{/* Animated background glow */}
 						<div className="absolute -inset-1 bg-gradient-to-r from-purple-600 to-pink-600 rounded-3xl blur opacity-30"></div>
 
-						<div className={`relative ${themeClasses.modalBg} backdrop-blur-xl rounded-3xl border ${theme === "dark" ? "border-white/10" : "border-gray-300/30"} shadow-2xl animate-fade-in flex flex-col max-h-full overflow-hidden`}>
+						<div
+							className={`relative ${themeClasses.modalBg} backdrop-blur-xl rounded-3xl border ${theme === "dark" ? "border-white/10" : "border-gray-300/30"} shadow-2xl animate-fade-in flex flex-col max-h-full overflow-hidden`}
+						>
 							{/* Header - Fixed at top */}
 							<div className="flex-shrink-0 p-4 sm:p-6 border-b border-white/10">
 								<div className="flex items-center justify-between">
 									<div>
-										<h3 id="contact-modal-title" className={`text-lg sm:text-xl font-bold ${themeClasses.text} mb-1`}>
+										<h3
+											id="contact-modal-title"
+											className={`text-lg sm:text-xl font-bold ${themeClasses.text} mb-1`}
+										>
 											Get In Touch
 										</h3>
-										<p id="contact-modal-description" className={`${themeClasses.textSecondary} text-xs sm:text-sm`}>
+										<p
+											id="contact-modal-description"
+											className={`${themeClasses.textSecondary} text-xs sm:text-sm`}
+										>
 											Send me a message and I'll get back to you!
 										</p>
 									</div>
@@ -788,7 +758,9 @@ ${formData.message}
 								<form onSubmit={handleSubmit} className="space-y-4">
 									{/* Name */}
 									<div>
-										<label className={`block ${themeClasses.text} text-xs sm:text-sm font-medium mb-2`}>
+										<label
+											className={`block ${themeClasses.text} text-xs sm:text-sm font-medium mb-2`}
+										>
 											Name
 										</label>
 										<input
@@ -804,7 +776,9 @@ ${formData.message}
 
 									{/* Email */}
 									<div>
-										<label className={`block ${themeClasses.text} text-xs sm:text-sm font-medium mb-2`}>
+										<label
+											className={`block ${themeClasses.text} text-xs sm:text-sm font-medium mb-2`}
+										>
 											Email
 										</label>
 										<input
@@ -820,7 +794,9 @@ ${formData.message}
 
 									{/* Subject */}
 									<div>
-										<label className={`block ${themeClasses.text} text-xs sm:text-sm font-medium mb-2`}>
+										<label
+											className={`block ${themeClasses.text} text-xs sm:text-sm font-medium mb-2`}
+										>
 											Subject
 										</label>
 										<input
@@ -836,7 +812,9 @@ ${formData.message}
 
 									{/* Message */}
 									<div>
-										<label className={`block ${themeClasses.text} text-xs sm:text-sm font-medium mb-2`}>
+										<label
+											className={`block ${themeClasses.text} text-xs sm:text-sm font-medium mb-2`}
+										>
 											Message
 										</label>
 										<textarea
@@ -855,7 +833,10 @@ ${formData.message}
 										type="submit"
 										className="w-full px-4 sm:px-6 py-3 sm:py-4 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-semibold rounded-lg sm:rounded-xl shadow-lg hover:shadow-purple-500/25 transform hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2 focus:outline-none focus:ring-4 focus:ring-purple-500/20 text-sm sm:text-base mt-6"
 									>
-										<Send className="w-4 h-4 sm:w-5 sm:h-5" aria-hidden="true" />
+										<Send
+											className="w-4 h-4 sm:w-5 sm:h-5"
+											aria-hidden="true"
+										/>
 										Send Message
 									</button>
 								</form>

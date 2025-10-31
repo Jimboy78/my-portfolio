@@ -57,11 +57,10 @@ const ProjectsGallery: React.FC<ProjectsGalleryProps> = ({
 					<h1
 						className={`text-4xl md:text-5xl font-bold ${themeClasses.text} mb-4`}
 					>
-						Featured Projects
+						All Projects
 					</h1>
 					<p className={`text-lg ${themeClasses.textSecondary}`}>
-						A showcase of my best work - from production apps to technical
-						experiments
+						Production applications, AI systems, and technical learning projects
 					</p>
 				</div>
 
@@ -93,7 +92,7 @@ const ProjectsGallery: React.FC<ProjectsGalleryProps> = ({
 				{otherProjects.length > 0 && (
 					<div>
 						<h2 className={`text-2xl font-bold ${themeClasses.text} mb-6`}>
-							All Projects
+							Other Projects
 						</h2>
 
 						<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

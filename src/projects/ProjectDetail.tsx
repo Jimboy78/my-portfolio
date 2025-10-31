@@ -1,6 +1,6 @@
 import type React from "react";
 import { useState } from "react";
-import { ArrowLeft, ExternalLink, Github, FileText, ChevronLeft, ChevronRight, Play } from "lucide-react";
+import { ArrowLeft, ExternalLink, Github, FileText, ChevronLeft, ChevronRight, Play, Music } from "lucide-react";
 import { useTheme } from "../styles/ThemeContext";
 import type { ProjectMetadata } from "./types";
 
@@ -13,6 +13,7 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ metadata, onBack }) => {
 	const { theme } = useTheme();
 	const [currentImageIndex, setCurrentImageIndex] = useState(0);
 	const [showVideo, setShowVideo] = useState(false);
+	const [currentSongIndex, setCurrentSongIndex] = useState(0);
 
 	const themeClasses = {
 		background:
@@ -180,8 +181,8 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ metadata, onBack }) => {
 					</div>
 				)}
 
-				{/* Multimedia Section: Video + Screenshots */}
-				{(metadata.heroVideo || (metadata.screenshots && metadata.screenshots.length > 0)) && (
+				{/* Multimedia Section: Video + Screenshots/Songs */}
+				{(metadata.heroVideo || (metadata.screenshots && metadata.screenshots.length > 0) || (metadata.songs && metadata.songs.length > 0)) && (
 					<div className="relative mb-8">
 						<div className="absolute inset-0 bg-white/5 backdrop-blur-xl rounded-3xl border border-white/10 shadow-2xl"></div>
 						<div className="relative p-6 md:p-8">
@@ -189,11 +190,24 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ metadata, onBack }) => {
 								Media Gallery
 							</h2>
 
-							<div className="grid grid-cols-1 lg:grid-cols-[420px_336px] gap-8 justify-center">
-								{/* Video Player - 420px for better space usage */}
+							{/* Conditional grid layout: horizontal video with songs uses different layout */}
+							<div className={`grid grid-cols-1 gap-8 ${
+								metadata.songs && metadata.songs.length > 0
+									? 'lg:grid-cols-[1fr_380px]' // Horizontal video + songs sidebar
+									: 'lg:grid-cols-[420px_336px] justify-center' // Mobile video + screenshots
+							}`}>
+								{/* Video Player - Adaptive aspect ratio */}
 								{metadata.heroVideo && (
-									<div className="relative w-full max-w-[420px] mx-auto lg:mx-0">
-										<div className="relative rounded-xl overflow-hidden bg-black shadow-2xl w-full aspect-[9/16]">
+									<div className={`relative w-full mx-auto lg:mx-0 ${
+										metadata.songs && metadata.songs.length > 0
+											? 'max-w-full' // Full width for horizontal video
+											: 'max-w-[420px]' // 420px for vertical mobile video
+									}`}>
+										<div className={`relative rounded-xl overflow-hidden bg-black shadow-2xl w-full ${
+											metadata.songs && metadata.songs.length > 0
+												? 'aspect-video' // 16:9 for horizontal videos
+												: 'aspect-[9/16]' // 9:16 for vertical mobile videos
+										}`}>
 											{showVideo ? (
 												<video
 													controls
@@ -221,7 +235,7 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ metadata, onBack }) => {
 											)}
 										</div>
 										<p className={`text-sm ${themeClasses.textMuted} mt-2 text-center`}>
-											App Demo Video
+											{metadata.songs && metadata.songs.length > 0 ? 'Generation Demo Video' : 'App Demo Video'}
 										</p>
 									</div>
 								)}
@@ -303,6 +317,93 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ metadata, onBack }) => {
 										)}
 									</div>
 								)}
+
+								{/* Audio Player for Songs - 380px sidebar */}
+								{metadata.songs && metadata.songs.length > 0 && (() => {
+									const currentSong = metadata.songs[currentSongIndex];
+									if (!currentSong) return null;
+									return (
+										<div className="relative w-full max-w-[380px] mx-auto lg:mx-0">
+											<div className={`${themeClasses.card} border rounded-2xl overflow-hidden shadow-2xl`}>
+												{/* Current Song Display */}
+												<div className="p-6 bg-gradient-to-br from-purple-600/20 to-blue-600/20">
+													<div className="flex items-center gap-3 mb-4">
+														<div className="p-3 rounded-xl bg-gradient-to-br from-purple-600 to-blue-600">
+															<Music className="w-6 h-6 text-white" />
+														</div>
+														<div className="flex-1 min-w-0">
+															<h3 className={`text-lg font-bold ${themeClasses.text} truncate`}>
+																{currentSong.title}
+															</h3>
+															{currentSong.artist && (
+																<p className={`text-sm ${themeClasses.textMuted} truncate`}>
+																	{currentSong.artist}
+																</p>
+															)}
+														</div>
+													</div>
+
+													{/* Audio Player */}
+													<audio
+														key={currentSongIndex}
+														controls
+														className="w-full"
+														style={{
+															height: '40px',
+															borderRadius: '8px',
+														}}
+													>
+														<source src={currentSong.src} type="audio/mpeg" />
+														Your browser does not support the audio element.
+													</audio>
+												</div>
+
+											{/* Song List */}
+											<div className="p-4 space-y-2 max-h-[400px] overflow-y-auto">
+												{metadata.songs.map((song, index) => (
+													<button
+														key={index}
+														onClick={() => setCurrentSongIndex(index)}
+														className={`w-full text-left p-3 rounded-xl transition-all duration-200 ${
+															index === currentSongIndex
+																? `bg-gradient-to-r ${metadata.gradient} text-white shadow-lg`
+																: `${themeClasses.card} border hover:bg-white/10`
+														}`}
+													>
+														<div className="flex items-center gap-3">
+															<div className={`w-8 h-8 rounded-lg flex items-center justify-center ${
+																index === currentSongIndex
+																	? 'bg-white/20'
+																	: 'bg-gradient-to-br from-purple-600/20 to-blue-600/20'
+															}`}>
+																<Music className="w-4 h-4" />
+															</div>
+															<div className="flex-1 min-w-0">
+																<p className="font-medium truncate">
+																	{song.title}
+																</p>
+																{song.artist && (
+																	<p className={`text-xs truncate ${
+																		index === currentSongIndex
+																			? 'text-white/80'
+																			: themeClasses.textMuted
+																	}`}>
+																		{song.artist}
+																	</p>
+																)}
+															</div>
+														</div>
+													</button>
+												))}
+											</div>
+										</div>
+
+											<p className={`text-sm ${themeClasses.textMuted} mt-2 text-center`}>
+												Generated Songs ({metadata.songs.length})
+											</p>
+										</div>
+									);
+								})()}
 							</div>
 						</div>
 					</div>

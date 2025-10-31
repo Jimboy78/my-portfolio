@@ -41,6 +41,13 @@ export interface ProjectMetadata {
 		caption?: string;
 	}>;
 
+	// Audio assets (for music/sound projects)
+	songs?: Array<{
+		src: string;
+		title: string;
+		artist?: string;
+	}>;
+
 	// Tech stack
 	techStack: Array<string>;
 
