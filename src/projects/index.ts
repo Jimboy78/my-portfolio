@@ -6,11 +6,24 @@ import { iptvMetadata } from "./iptv-mobile/metadata";
 import AventralyProject from "./aventraly/AventralyProject";
 import { aventralyMetadata } from "./aventraly/metadata";
 
+import AutoYTProject from "./autoyt/AutoYTProject";
+import { autoytMetadata } from "./autoyt/metadata";
+import AventraStorytellerProject from "./aventra-storyteller/AventraStorytellerProject";
+import { aventraStorytellerMetadata } from "./aventra-storyteller/metadata";
+
 // Import other projects
 import Printer3dProject from "./3d-printer/Printer3dProject";
 import { printer3dMetadata } from "./3d-printer/metadata";
 import SmartCityProject from "./smart-city/SmartCityProject";
 import { smartCityMetadata } from "./smart-city/metadata";
+import PlanNutricionalProject from "./plan-nutricional/PlanNutricionalProject";
+import { planNutricionalMetadata } from "./plan-nutricional/metadata";
+import RickMortyProject from "./rick-morty/RickMortyProject";
+import { rickMortyMetadata } from "./rick-morty/metadata";
+import EarthquakesProject from "./earthquakes/EarthquakesProject";
+import { earthquakesMetadata } from "./earthquakes/metadata";
+import SportsMatchmakingProject from "./sports-matchmaking/SportsMatchmakingProject";
+import { sportsMatchmakingMetadata } from "./sports-matchmaking/metadata";
 
 // All projects organized by category
 export const allProjects: Array<Project> = [
@@ -23,6 +36,14 @@ export const allProjects: Array<Project> = [
 		metadata: iptvMetadata,
 		DetailComponent: IPTVProject,
 	},
+	{
+		metadata: autoytMetadata,
+		DetailComponent: AutoYTProject,
+	},
+	{
+		metadata: aventraStorytellerMetadata,
+		DetailComponent: AventraStorytellerProject,
+	},
 	// Other Projects
 	{
 		metadata: printer3dMetadata,
@@ -31,6 +52,22 @@ export const allProjects: Array<Project> = [
 	{
 		metadata: smartCityMetadata,
 		DetailComponent: SmartCityProject,
+	},
+	{
+		metadata: planNutricionalMetadata,
+		DetailComponent: PlanNutricionalProject,
+	},
+	{
+		metadata: earthquakesMetadata,
+		DetailComponent: EarthquakesProject,
+	},
+	{
+		metadata: sportsMatchmakingMetadata,
+		DetailComponent: SportsMatchmakingProject,
+	},
+	{
+		metadata: rickMortyMetadata,
+		DetailComponent: RickMortyProject,
 	},
 ];
 
