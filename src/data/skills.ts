@@ -4,6 +4,7 @@ import {
 	Trophy,
 	Award,
 	Zap,
+	Sparkles,
 	type LucideIcon,
 } from "lucide-react";
 
@@ -22,9 +23,14 @@ export const skills: Skills = {
 		color: "from-blue-500 to-blue-600",
 	},
 	Backend: {
-		techs: ["Node.js", "Express", "Prisma", "REST APIs"],
+		techs: ["Node.js", "Express", "Prisma", "Python", "FastAPI", "Ruby on Rails", "REST APIs"],
 		icon: Briefcase,
 		color: "from-slate-500 to-slate-600",
+	},
+	"AI/ML": {
+		techs: ["LangChain", "OpenAI API", "Claude", "Gemini", "ChromaDB", "Vector Search"],
+		icon: Sparkles,
+		color: "from-pink-500 to-purple-600",
 	},
 	"Mobile/TV": {
 		techs: ["React Native", "Expo", "Android TV/tvOS", "EAS"],
@@ -32,12 +38,12 @@ export const skills: Skills = {
 		color: "from-purple-500 to-purple-600",
 	},
 	Database: {
-		techs: ["MySQL", "PostgreSQL", "MongoDB"],
+		techs: ["MySQL", "PostgreSQL", "MongoDB", "Supabase", "SQLAlchemy"],
 		icon: Award,
 		color: "from-indigo-500 to-indigo-600",
 	},
 	DevOps: {
-		techs: ["Docker", "Drone CI", "Gitea", "Portainer"],
+		techs: ["Docker", "Docker Compose", "Celery", "Redis", "Vercel", "Drone CI", "Gitea", "Portainer"],
 		icon: Zap,
 		color: "from-gray-500 to-gray-600",
 	},

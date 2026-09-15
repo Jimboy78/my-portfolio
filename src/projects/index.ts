@@ -6,6 +6,8 @@ import { iptvMetadata } from "./iptv-mobile/metadata";
 import AventralyProject from "./aventraly/AventralyProject";
 import { aventralyMetadata } from "./aventraly/metadata";
 
+import BlueHorseProject from "./bluehorse/BlueHorseProject";
+import { bluehorseMetadata } from "./bluehorse/metadata";
 import AutoYTProject from "./autoyt/AutoYTProject";
 import { autoytMetadata } from "./autoyt/metadata";
 import AventraStorytellerProject from "./aventra-storyteller/AventraStorytellerProject";
@@ -28,6 +30,10 @@ import { sportsMatchmakingMetadata } from "./sports-matchmaking/metadata";
 // All projects organized by category
 export const allProjects: Array<Project> = [
 	// Featured Projects
+	{
+		metadata: bluehorseMetadata,
+		DetailComponent: BlueHorseProject,
+	},
 	{
 		metadata: aventralyMetadata,
 		DetailComponent: AventralyProject,
