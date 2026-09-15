@@ -1,4 +1,5 @@
 import type React from "react";
+import { useEffect, useState } from "react";
 import { ArrowRight, Star } from "lucide-react";
 import { useTheme } from "../styles/ThemeContext";
 import type { Project } from "./types";
@@ -121,6 +122,83 @@ const ProjectsGallery: React.FC<ProjectsGalleryProps> = ({
 	);
 };
 
+type Orientation = "portrait" | "landscape";
+
+// Wider than this counts as a landscape screenshot (desktop/web UI).
+const LANDSCAPE_RATIO = 1.2;
+
+/**
+ * Portrait/square images (phone screens, photos) fill the card as before.
+ * Landscape screenshots would lose their header to a center crop, so they're shown
+ * as a floating browser window pinned to the top, over a blurred copy of the image.
+ */
+const ProjectThumbnail: React.FC<{ src: string; alt: string; gradient: string }> = ({
+	src,
+	alt,
+	gradient,
+}) => {
+	const [orientation, setOrientation] = useState<Orientation | null>(null);
+
+	useEffect(() => {
+		let cancelled = false;
+		const img = new Image();
+		const measure = () => {
+			if (cancelled || !img.naturalHeight) return;
+			setOrientation(
+				img.naturalWidth / img.naturalHeight > LANDSCAPE_RATIO ? "landscape" : "portrait",
+			);
+		};
+		img.onload = measure;
+		img.onerror = () => !cancelled && setOrientation("portrait");
+		img.src = src;
+		if (img.complete) measure();
+		return () => {
+			cancelled = true;
+		};
+	}, [src]);
+
+	if (orientation === null) {
+		return <div className="w-full h-full animate-pulse bg-white/5" />;
+	}
+
+	if (orientation === "portrait") {
+		return (
+			<img
+				src={src}
+				alt={alt}
+				className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+			/>
+		);
+	}
+
+	return (
+		<>
+			<img
+				src={src}
+				alt=""
+				aria-hidden="true"
+				className="absolute inset-0 w-full h-full object-cover scale-125 blur-2xl opacity-70 saturate-150"
+			/>
+			<div className={`absolute inset-0 bg-gradient-to-br ${gradient} opacity-25`} />
+			<div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
+			<div className="absolute inset-x-6 top-8 -bottom-2 [perspective:1200px]">
+				<div className="h-full rounded-t-xl overflow-hidden border border-white/15 bg-slate-900 shadow-2xl shadow-black/60 origin-bottom transition-transform duration-500 ease-out [transform:rotateX(10deg)] group-hover:[transform:rotateX(0deg)_translateY(-6px)]">
+					<div className="flex items-center gap-1.5 h-5 px-2.5 bg-slate-800/95 border-b border-white/10">
+						<span className="w-2 h-2 rounded-full bg-red-400/80" />
+						<span className="w-2 h-2 rounded-full bg-yellow-400/80" />
+						<span className="w-2 h-2 rounded-full bg-green-400/80" />
+					</div>
+					<img
+						src={src}
+						alt={alt}
+						className="w-full h-[calc(100%-1.25rem)] object-cover object-top"
+					/>
+				</div>
+			</div>
+		</>
+	);
+};
+
 interface ProjectCardProps {
 	project: Project;
 	onClick: () => void;
@@ -156,7 +234,9 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
 				className={`relative ${themeClasses.card} border rounded-3xl overflow-hidden h-full`}
 			>
 				{/* Thumbnail */}
-				<div className="relative h-48 bg-gradient-to-br from-slate-800 to-slate-900 overflow-hidden">
+				<div
+					className={`relative ${featured ? "h-56" : "h-48"} bg-gradient-to-br from-slate-800 to-slate-900 overflow-hidden`}
+				>
 					{metadata.thumbnailVideo ? (
 						<video
 							autoPlay
@@ -168,10 +248,10 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
 							<source src={metadata.thumbnailVideo} type="video/mp4" />
 						</video>
 					) : metadata.thumbnailImage ? (
-						<img
+						<ProjectThumbnail
 							src={metadata.thumbnailImage}
 							alt={metadata.title}
-							className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+							gradient={metadata.gradient}
 						/>
 					) : (
 						<div
