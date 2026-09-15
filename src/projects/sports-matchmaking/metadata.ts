@@ -1,49 +1,85 @@
-import { Users } from "lucide-react";
+import { CalendarCheck, Flame, MapPin, Trophy, Users } from "lucide-react";
 import type { ProjectMetadata } from "../types";
 
 export const sportsMatchmakingMetadata: ProjectMetadata = {
 	id: "sports-matchmaking",
-	title: "Sports Matchmaking",
-	subtitle: "React Native app for finding nearby sports partners",
-	period: "2024",
-	status: "completed",
+	title: "MatchPoint",
+	subtitle: "Sports matchmaking app — swipe for partners, book courts, climb the ranking",
+	period: "2024 — 2026",
+	status: "production",
 
 	description:
-		"A React Native (Expo) mobile app for matching people with nearby sports partners — combining a profile system, a map-based partner finder, matchmaking, and a ranking view.",
+		"A cross-platform React Native (Expo) app for pádel, tennis and volleyball players: swipe through nearby players ranked by an affinity score, celebrate a match, book a court by day and time slot, find courts on a map and track your ELO on an animated leaderboard. Runs on iOS, Android and the web, where it's presented inside a phone frame next to a landing page.",
+
+	stats: [
+		{ value: "5", label: "Screens", icon: Users },
+		{ value: "3", label: "Sports", icon: Trophy },
+		{ value: "3", label: "Platforms (iOS · Android · Web)", icon: MapPin },
+		{ value: "0", label: "Runtime UI libraries", icon: Flame },
+	],
+
+	challenge:
+		"The first version was a set of disconnected screens: hardcoded lists, placeholder images from a dead service, a map that couldn't run on the web and a match screen referencing state that didn't exist. The goal was a cohesive product you can actually try from a browser.",
 
 	solution: [
-		"Profile creation and display flow (ProfileForm, ProfileInput, ProfileDisplay)",
-		"Map-based screen (react-native-maps) for finding nearby players",
-		"Matchmaking screen and player ranking view",
-		"React Navigation for screen flow, NativeWind for styling",
+		"Swipe-to-match deck built on PanResponder + Animated, with rotation, JUGAMOS/PASO stamps and a spring-in match celebration",
+		"Affinity score per player from level gap, shared availability and distance — the deck is ordered by it",
+		"Booking sheet: court, next seven days and time slots with already-taken hours, feeding a live next-match countdown on Home",
+		"Courts screen with a platform-split map: react-native-maps on native, Leaflet on web via a .web.tsx module",
+		"Leaderboard with an animated podium and ELO trends; profile with rating, level progress, recent form, match history and inline editing",
+		"Single reducer-based app store shared across tabs; dark lime design system with an SVG logo, generated app icons and Bebas Neue / Inter",
+		"Expo web export deployed to Vercel, wrapped on desktop in a landing column + phone frame",
 	],
+
+	result:
+		"A prototype that now reads like a real product and can be demoed from a link, while keeping one codebase for mobile and web.",
 
 	highlights: [
 		{
-			title: "Map-Based Discovery",
+			title: "Affinity-ranked swipe deck",
 			description:
-				"Integrated react-native-maps to let users discover nearby matches geographically rather than through a plain list, closer to how a real matchmaking product would work.",
+				"Every candidate gets a 0–100 score blending skill level, overlapping availability and distance; high scores trigger an instant match, the rest become pending invitations.",
+			code: `export function compatibility(p: Player, me: Profile) {
+  const levelScore = Math.max(0, 1 - Math.abs(p.level - me.level) / 3);
+  const shared = p.availability.filter((a) => me.availability.includes(a)).length;
+  const availScore = Math.min(1, shared / 2);
+  const distScore = Math.max(0, 1 - p.distanceKm / 15);
+  return Math.round((levelScore * 0.5 + availScore * 0.3 + distScore * 0.2) * 100);
+}`,
+			language: "typescript",
 		},
 		{
-			title: "Full Screen Flow",
+			title: "One screen, two map engines",
 			description:
-				"Built out a complete navigation flow — home, profile, map, match, ranking, and contact — using React Navigation and a shared context for matchmaking state.",
+				"Metro resolves CourtsMap.web.tsx on the web (Leaflet with keyless dark tiles and emoji pins) and CourtsMap.tsx on iOS/Android (react-native-maps), behind the same props — the Courts screen never branches on platform.",
+		},
+		{
+			title: "Gestures without a gesture library",
+			description:
+				"The swipe card reads the latest deck through refs so the PanResponder is created once, animates off-screen, dispatches like/pass and resets on the next frame after React swaps in the next card — no flicker, works with touch and mouse.",
 		},
 	],
 
 	techStack: [
 		"React Native",
-		"Expo",
+		"Expo SDK 51",
 		"TypeScript",
 		"React Navigation",
 		"react-native-maps",
-		"NativeWind",
+		"Leaflet",
+		"react-native-svg",
+		"Vercel",
 	],
 
-	gradient: "from-sky-500 via-blue-600 to-cyan-600",
-	icon: Users,
+	gradient: "from-lime-400 via-green-500 to-emerald-600",
+	icon: CalendarCheck,
 
 	links: [
+		{
+			label: "Live Demo",
+			url: "https://matchpoint-sports.vercel.app",
+			type: "demo",
+		},
 		{
 			label: "View on GitHub",
 			url: "https://github.com/Jimboy78/sports-matchmaking",
@@ -51,5 +87,5 @@ export const sportsMatchmakingMetadata: ProjectMetadata = {
 		},
 	],
 
-	featured: false,
+	featured: true,
 };
