@@ -13,10 +13,10 @@ export const sportsMatchmakingMetadata: ProjectMetadata = {
 	status: "production",
 
 	description:
-		"A cross-platform React Native (Expo) app for pádel, tennis and volleyball players: swipe through nearby players ranked by an affinity score, celebrate a match, book a court by day and time slot, find courts on a map and track your ELO on an animated leaderboard. Runs on iOS, Android and the web, where it's presented inside a phone frame next to a landing page.",
+		"A cross-platform React Native (Expo) app for pádel, tennis and volleyball players: swipe through nearby players ranked by an affinity score, celebrate a match, book a court by day and time slot, find courts on a map, score the match point by point with a live scorer that knows the real rules, and track your ELO on an animated leaderboard. Runs on iOS, Android and the web, where it's presented inside a phone frame next to a landing page.",
 
 	stats: [
-		{ value: "5", label: "Screens", icon: Users },
+		{ value: "6", label: "Screens", icon: Users },
 		{ value: "3", label: "Sports", icon: Trophy },
 		{ value: "3", label: "Platforms (iOS · Android · Web)", icon: MapPin },
 		{ value: "0", label: "Runtime UI libraries", icon: Flame },
@@ -30,7 +30,9 @@ export const sportsMatchmakingMetadata: ProjectMetadata = {
 		"Affinity score per player from level gap, shared availability and distance — the deck is ordered by it",
 		"Booking sheet: court, next seven days and time slots with already-taken hours, feeding a live next-match countdown on Home",
 		"Courts screen with a platform-split map: react-native-maps on native, Leaflet on web via a .web.tsx module",
-		"Leaderboard with an animated podium and ELO trends; profile with rating, level progress, recent form, match history and inline editing",
+		"Live match scorer with real rules — tennis/pádel 15-30-40, deuce/advantage or golden point, 6-6 tie-break with correct serve rotation, best of 3; volleyball rally scoring to 25/15 — plus animated BREAK/SET/MATCH POINT callouts, momentum, stats and undo",
+		"Finishing a match computes a real Elo update against the rival's rating and feeds profile, streak, recent form and history",
+		"Leaderboard with an animated podium and ELO trends;profile with rating, level progress, recent form, match history and inline editing",
 		"Single reducer-based app store shared across tabs; dark lime design system with an SVG logo, generated app icons and Bebas Neue / Inter",
 		"Expo web export deployed to Vercel, wrapped on desktop in a landing column + phone frame",
 	],
@@ -49,6 +51,21 @@ export const sportsMatchmakingMetadata: ProjectMetadata = {
   const availScore = Math.min(1, shared / 2);
   const distScore = Math.max(0, 1 - p.distanceKm / 15);
   return Math.round((levelScore * 0.5 + availScore * 0.3 + distScore * 0.2) * 100);
+}`,
+			language: "typescript",
+		},
+		{
+			title: "Scoring engine as a replay of the point log",
+			description:
+				"The match is never stored as mutable score — it's derived by replaying every point. Undo is dropping the last entry, and callouts (BREAK, SET, MATCH POINT) come from replaying both possible next points and checking what changes. Rules are covered by 13 assertion checks.",
+			code: `const gameWon = ps >= 4 && (ps - po >= 2 || (config.goldenPoint && po >= 3));
+if (!gameWon) continue;
+if (s !== snap.server) snap.breaks[s]++;
+snap.games[s]++;
+snap.server = other(snap.server);
+if (gs === 6 && go === 6) {
+  snap.tiebreak = true;          // first to 7, win by 2
+  tbServer = snap.server;        // one serve, then alternate every two
 }`,
 			language: "typescript",
 		},
