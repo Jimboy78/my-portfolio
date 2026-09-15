@@ -243,6 +243,9 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
 							loop
 							muted
 							playsInline
+							preload="metadata"
+							// Preview videos are tens of MB; show the still image until frames arrive.
+							poster={metadata.thumbnailImage}
 							className="w-full h-full object-cover"
 						>
 							<source src={metadata.thumbnailVideo} type="video/mp4" />
