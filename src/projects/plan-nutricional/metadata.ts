@@ -8,12 +8,12 @@ import dark from "./assets/dark.jpg";
 export const planNutricionalMetadata: ProjectMetadata = {
 	id: "plan-nutricional",
 	title: "Plan Nutricional",
-	subtitle: "Athlete nutrition coach: live macro rings, streaks & hydration",
+	subtitle: "Athlete nutrition coach: live macro rings, streaks, hydration & a batch-cooking planner",
 	period: "2026",
 	status: "production",
 
 	description:
-		"A Next.js nutrition coach built around a real basketball player's training week. It detects today's day type, tracks meals against per-day macro targets with animated rings, counts down to the next meal, logs hydration, keeps a streak of completed days — plus supplements, batch cooking and a weekly shopping list.",
+		"A Next.js nutrition coach built around a real basketball player's training week. It detects today's day type, tracks meals against per-day macro targets with animated rings, counts down to the next meal, logs hydration, keeps a streak of completed days, and turns Sunday meal prep into a scheduled cooking session — pick the week's preparations, get an oven/burner timeline where everything finishes together, then follow a full-screen cook mode with timers and alarms. Plus supplements and a weekly shopping list.",
 
 	heroImage: screenshot,
 
@@ -34,6 +34,9 @@ export const planNutricionalMetadata: ProjectMetadata = {
 		"Hydration tracker with animated water glasses, reset per day",
 		"Streak of consecutive completed days derived from per-date localStorage history, with confetti when the day is complete",
 		"Weekly training chart color-coded by day type, highlighting today",
+		"Batch-cooking planner: select preparations (or a one-tap typical week) and a scheduler parses the plan's free text into station, oven temperature, duration and tupper yield",
+		"Session timeline as a Gantt chart — oven rounds by temperature with shared trays, two burners packed longest-first, counter prep — aligned so everything is ready at the same time, with minutes saved vs cooking one at a time",
+		"Full-screen cook mode: session ring clock, Now / Next / Done columns with per-dish countdown rings, start and finish alarms (Web Audio + vibration), Screen Wake Lock, and a session that survives reloads",
 		"Brand identity: basketball-and-leaf SVG logo and favicon, Bebas Neue + Outfit via next/font, animated gradient header, sticky pill navigation and dark mode",
 	],
 
@@ -59,6 +62,23 @@ export const planNutricionalMetadata: ProjectMetadata = {
 			language: "typescript",
 		},
 		{
+			title: "A kitchen scheduler that finishes everything together",
+			description:
+				"Oven work is grouped by temperature (hottest first) with up to three trays per round, and shorter trays go in later so a round comes out at once. Burners are packed longest-first, then burner and counter lanes are shifted so they end with the oven.",
+			code: `const total = Math.max(0, ovenEnd, counterEnd, ...burners);
+for (const s of stove) {
+  // start later instead of finishing early: food comes out hot, all at once
+  const shift = total - burners[laneIndex(s)];
+  scheduled.push({ ...s, start: s.start + shift, end: s.end + shift });
+}`,
+			language: "typescript",
+		},
+		{
+			title: "Timers that survive a reload",
+			description:
+				"The cook session stores only the selection, a start timestamp and accumulated pause time. Elapsed time is derived on every tick, so reloading or minimizing never loses progress, and alarms fire for each start or finish the clock crossed since the previous tick.",
+		},
+		{
 			title: "Macros follow the chosen option",
 			description:
 				"Many meals offer alternatives with different macros. Rings, the summary bar and the day view all resolve a meal's macros through the same helper, so switching an option updates every total consistently.",
@@ -77,7 +97,7 @@ export const planNutricionalMetadata: ProjectMetadata = {
 		{ src: dark, alt: "Completed day in dark mode", caption: "Day complete — streak and celebration, in dark mode" },
 	],
 
-	techStack: ["Next.js 14", "React 18", "TypeScript", "SVG", "CSS Animations", "localStorage", "Vercel"],
+	techStack: ["Next.js 14", "React 18", "TypeScript", "SVG", "CSS Animations", "Web Audio API", "Screen Wake Lock API", "localStorage", "Vercel"],
 
 	gradient: "from-orange-500 via-amber-500 to-green-500",
 	icon: Salad,
