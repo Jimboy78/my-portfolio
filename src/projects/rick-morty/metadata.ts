@@ -4,6 +4,7 @@ import screenshot from "./assets/screenshot.jpg";
 import dossier from "./assets/dossier.jpg";
 import portal from "./assets/portal.jpg";
 import cable from "./assets/cable.jpg";
+import atlas from "./assets/atlas.jpg";
 
 export const rickMortyMetadata: ProjectMetadata = {
 	id: "rick-morty",
@@ -34,6 +35,7 @@ export const rickMortyMetadata: ProjectMetadata = {
 		"Citadel-style dossier modal with stamped status and every episode appearance",
 		"Interdimensional Cable: a wood-grain CRT TV where CH 001–826 map to characters — canvas analog snow, scanlines, chromatic-aberration jitter, power-off collapse, lower-third straps and a generated news ticker",
 		"TV remote with rotating knob, arrow-key surfing, direct numeric dialing, auto-surf and a recently-watched strip; Web Audio static bursts synthesized on the fly",
+		"Multiverse Atlas: every location charted on a canvas galaxy map — one galaxy per dimension, planets sized by population on tilted orbits, pan/zoom/pinch, portal flights with a camera arc, minimap, type filters, residents panel and a persisted travel log with explorer ranks",
 		"Portal Gun: fires a random character through a multi-ring conic-gradient vortex animation",
 		"\"Who's that being?\" game — blurred close-up reveal, streaks and a persisted best score",
 		"Season timeline with cast-size bars, and a locations browser with lazily loaded resident avatars",
@@ -93,6 +95,7 @@ gain.gain.exponentialRampToValueAtTime(0.0001, t + 0.45);`,
 		{ src: dossier, alt: "Character dossier modal", caption: "Citadel dossier with every episode appearance" },
 		{ src: portal, alt: "Portal Gun", caption: "Portal Gun — a random being through the vortex" },
 		{ src: cable, alt: "Interdimensional Cable", caption: "Interdimensional Cable — surf 826 channels on a retro CRT" },
+		{ src: atlas, alt: "Multiverse Atlas", caption: "Multiverse Atlas — 126 locations as a galaxy map, here after a portal jump to the Citadel" },
 	],
 
 	techStack: ["React 18", "TypeScript", "Vite", "Canvas API", "Web Audio API", "CSS Animations", "REST API", "Vercel"],
