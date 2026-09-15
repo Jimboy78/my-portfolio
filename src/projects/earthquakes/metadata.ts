@@ -12,7 +12,7 @@ export const earthquakesMetadata: ProjectMetadata = {
 	status: "production",
 
 	description:
-		"A live earthquake monitor on real-time USGS data: a dark interactive world map with magnitude-scaled markers and shockwave pulses, filters and auto-refresh, magnitude analytics and a detailed page per event. Backed by a Ruby on Rails API that ingests the USGS catalog into PostgreSQL and stores comments per earthquake.",
+		"A live earthquake monitor on real-time USGS data: a dark interactive world map with magnitude-scaled markers and shockwave pulses, filters and auto-refresh, magnitude analytics, a detailed page per event and a time-lapse replay that plays the whole window back with ripples, a scrubbable seismograph and optional sonification. Backed by a Ruby on Rails API that ingests the USGS catalog into PostgreSQL and stores comments per earthquake.",
 
 	heroImage: screenshot,
 
@@ -31,6 +31,9 @@ export const earthquakesMetadata: ProjectMetadata = {
 		"Leaflet world map with magnitude-colored, magnitude-scaled markers, animated shockwaves on M4.5+ events and fly-to from the event list",
 		"Time-window and magnitude-feed switches, min-magnitude slider, place search, latest/strongest sorting",
 		"60-second auto-refresh that diffs event ids and raises toasts for newly detected earthquakes",
+		"Replay mode: plays every filtered event in chronological order at three speeds — map, stats and list follow the playhead while fresh events emit one-shot shockwave rings",
+		"Canvas seismograph built from a damped burst per quake, colored by magnitude, that lights up as it plays and doubles as the scrubber",
+		"Web Audio sonification: each quake crossed by the playhead becomes a tone — stronger events are lower, louder and longer",
 		"Stats row (events, strongest, average depth, felt reports, tsunami flags) with a magnitude histogram",
 		"Event page with glowing magnitude, PAGER/tsunami chips, a depth gauge from surface to upper mantle, regional mini map and nearby activity via the USGS FDSN event API",
 		"Rails fixes: public show action, lookups by USGS id, epoch-ms timestamps in the ingestion rake task, env-driven CORS origins",
@@ -53,6 +56,19 @@ export const earthquakesMetadata: ProjectMetadata = {
   knownIds.current = new Set(list.map((q) => q.id));
   setQuakes(list);
 });`,
+			language: "javascript",
+		},
+		{
+			title: "Replay at 10 fps without melting the map",
+			description:
+				"The playhead advances every 100 ms, so thousands of Leaflet markers would restyle on each tick. Markers are memoized per quake and ring icons are cached by color and size, so a tick only mounts the newly revealed events and their shockwaves play exactly once.",
+			code: `const QuakeDot = memo(function QuakeDot({ quake, isSelected, onSelect }) { /* CircleMarker */ });
+
+function cachedIcon(kind, color, rawSize) {
+  const key = \`\${kind}|\${color}|\${Math.round(rawSize)}\`;
+  if (!iconCache.has(key)) iconCache.set(key, L.divIcon({ className: \`\${kind}-icon\`, /* rings */ }));
+  return iconCache.get(key); // same object → Leaflet never swaps the DOM node
+}`,
 			language: "javascript",
 		},
 		{
@@ -83,7 +99,7 @@ earthquake.save if earthquake.changed?`,
 		{ src: detail, alt: "Earthquake event page", caption: "Event page: magnitude, alert chips, depth gauge and regional map" },
 	],
 
-	techStack: ["React 18", "React Router", "Leaflet", "Ruby on Rails 7", "PostgreSQL", "USGS API", "Vercel"],
+	techStack: ["React 18", "React Router", "Leaflet", "Canvas API", "Web Audio API", "Ruby on Rails 7", "PostgreSQL", "USGS API", "Vercel"],
 
 	gradient: "from-amber-600 via-orange-600 to-red-600",
 	icon: Waves,
