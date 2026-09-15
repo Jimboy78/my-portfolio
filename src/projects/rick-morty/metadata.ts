@@ -3,16 +3,17 @@ import type { ProjectMetadata } from "../types";
 import screenshot from "./assets/screenshot.jpg";
 import dossier from "./assets/dossier.jpg";
 import portal from "./assets/portal.jpg";
+import cable from "./assets/cable.jpg";
 
 export const rickMortyMetadata: ProjectMetadata = {
 	id: "rick-morty",
 	title: "Rick & Morty Multiverse",
-	subtitle: "Interactive encyclopedia, portal gun & trivia game",
+	subtitle: "Interactive encyclopedia, interdimensional cable TV, portal gun & trivia game",
 	period: "2024 — 2026",
 	status: "production",
 
 	description:
-		"A themed, highly interactive encyclopedia on top of the public Rick and Morty API: an 826-character explorer with filters and infinite scroll, a Portal Gun that pulls a random being through an animated vortex, a guessing game, season timelines and planet browsing — wrapped in three switchable \"dimension\" themes over a live starfield.",
+		"A themed, highly interactive encyclopedia on top of the public Rick and Morty API: an 826-character explorer with filters and infinite scroll, Interdimensional Cable — a retro CRT where every character is a channel you surf with a knob, static and a news ticker — a Portal Gun that pulls a random being through an animated vortex, a guessing game, season timelines and planet browsing, all wrapped in three switchable \"dimension\" themes over a live starfield.",
 
 	heroImage: screenshot,
 
@@ -31,6 +32,8 @@ export const rickMortyMetadata: ProjectMetadata = {
 		"Character explorer with debounced search, status/species/gender filters, IntersectionObserver infinite scroll and AbortController request cancellation",
 		"Holographic 3D-tilt cards driven by pointer position via CSS custom properties",
 		"Citadel-style dossier modal with stamped status and every episode appearance",
+		"Interdimensional Cable: a wood-grain CRT TV where CH 001–826 map to characters — canvas analog snow, scanlines, chromatic-aberration jitter, power-off collapse, lower-third straps and a generated news ticker",
+		"TV remote with rotating knob, arrow-key surfing, direct numeric dialing, auto-surf and a recently-watched strip; Web Audio static bursts synthesized on the fly",
 		"Portal Gun: fires a random character through a multi-ring conic-gradient vortex animation",
 		"\"Who's that being?\" game — blurred close-up reveal, streaks and a persisted best score",
 		"Season timeline with cast-size bars, and a locations browser with lazily loaded resident avatars",
@@ -67,6 +70,18 @@ export const rickMortyMetadata: ProjectMetadata = {
 			language: "typescript",
 		},
 		{
+			title: "Analog TV static, synthesized",
+			description:
+				"The snow is a 160×120 ImageData refilled with random luminance every other frame and upscaled with pixelated rendering; the matching hiss is white noise pushed through a band-pass filter with an exponential gain envelope — no image or audio assets.",
+			code: `const buffer = ctx.createBuffer(1, ctx.sampleRate * 0.45, ctx.sampleRate);
+buffer.getChannelData(0).forEach((_, i, d) => (d[i] = Math.random() * 2 - 1));
+const band = ctx.createBiquadFilter();
+band.type = "bandpass";
+band.frequency.value = 2400;
+gain.gain.exponentialRampToValueAtTime(0.0001, t + 0.45);`,
+			language: "typescript",
+		},
+		{
 			title: "Themeable dimensions",
 			description:
 				"Every color is a CSS token swapped by a data-dimension attribute on the root; even the canvas starfield reads the current accent token each frame, so switching universes recolors the whole app instantly.",
@@ -77,9 +92,10 @@ export const rickMortyMetadata: ProjectMetadata = {
 		{ src: screenshot, alt: "Character explorer", caption: "826 characters with filters, infinite scroll and tilt cards" },
 		{ src: dossier, alt: "Character dossier modal", caption: "Citadel dossier with every episode appearance" },
 		{ src: portal, alt: "Portal Gun", caption: "Portal Gun — a random being through the vortex" },
+		{ src: cable, alt: "Interdimensional Cable", caption: "Interdimensional Cable — surf 826 channels on a retro CRT" },
 	],
 
-	techStack: ["React 18", "TypeScript", "Vite", "Canvas API", "CSS Animations", "REST API", "Vercel"],
+	techStack: ["React 18", "TypeScript", "Vite", "Canvas API", "Web Audio API", "CSS Animations", "REST API", "Vercel"],
 
 	gradient: "from-lime-400 via-green-500 to-emerald-600",
 	icon: Atom,
