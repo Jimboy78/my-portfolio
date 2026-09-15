@@ -100,5 +100,5 @@ export const sportsMatchmakingMetadata: ProjectMetadata = {
 		},
 	],
 
-	featured: true,
+	featured: false,
 };

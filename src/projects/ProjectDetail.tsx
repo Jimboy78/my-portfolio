@@ -1,8 +1,37 @@
 import type React from "react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ArrowLeft, ExternalLink, Github, FileText, ChevronLeft, ChevronRight, Play, Music } from "lucide-react";
 import { useTheme } from "../styles/ThemeContext";
 import type { ProjectMetadata } from "./types";
+
+// Width / height of each image once loaded (null while pending or on error).
+function useImageRatios(srcs: string[]): Array<number | null> {
+	const key = srcs.join("|");
+	const [ratios, setRatios] = useState<Array<number | null>>(() => srcs.map(() => null));
+
+	useEffect(() => {
+		let cancelled = false;
+		setRatios(srcs.map(() => null));
+		srcs.forEach((src, i) => {
+			const img = new Image();
+			img.onload = () => {
+				if (cancelled || !img.naturalHeight) return;
+				setRatios((prev) => {
+					const next = [...prev];
+					next[i] = img.naturalWidth / img.naturalHeight;
+					return next;
+				});
+			};
+			img.src = src;
+		});
+		return () => {
+			cancelled = true;
+		};
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [key]);
+
+	return ratios;
+}
 
 interface ProjectDetailProps {
 	metadata: ProjectMetadata;
@@ -60,6 +89,15 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ metadata, onBack }) => {
 	};
 
 	const currentScreenshot = metadata.screenshots?.[currentImageIndex];
+
+	// Desktop/web screenshots get a 16:9 stage; phone screenshots keep the 9:16 one.
+	// Mixed sets follow the majority and the odd ones are letterboxed over a blurred copy.
+	const screenshotRatios = useImageRatios(metadata.screenshots?.map((s) => s.src) ?? []);
+	const measuredRatios = screenshotRatios.filter((r): r is number => r !== null);
+	const landscapeGallery =
+		measuredRatios.length > 0 &&
+		measuredRatios.filter((r) => r > 1.2).length * 2 > measuredRatios.length;
+	const hasSongs = !!metadata.songs && metadata.songs.length > 0;
 
 	return (
 		<div className={`min-h-screen ${themeClasses.background} p-4 md:p-8`}>
@@ -192,9 +230,13 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ metadata, onBack }) => {
 
 							{/* Conditional grid layout: horizontal video with songs uses different layout */}
 							<div className={`grid grid-cols-1 gap-8 ${
-								metadata.songs && metadata.songs.length > 0
+								hasSongs
 									? 'lg:grid-cols-[1fr_380px]' // Horizontal video + songs sidebar
-									: 'lg:grid-cols-[420px_336px] justify-center' // Mobile video + screenshots
+									: landscapeGallery
+										? metadata.heroVideo
+											? 'lg:grid-cols-[360px_1fr] items-start' // Mobile video + wide screenshots
+											: '' // Wide screenshots take the full row
+										: 'lg:grid-cols-[420px_336px] justify-center' // Mobile video + screenshots
 							}`}>
 								{/* Video Player - Adaptive aspect ratio */}
 								{metadata.heroVideo && (
@@ -242,13 +284,27 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ metadata, onBack }) => {
 
 								{/* Screenshot Carousel - 336px for better space usage */}
 								{metadata.screenshots && metadata.screenshots.length > 0 && (
-									<div className="relative w-full max-w-[336px] mx-auto lg:mx-0">
+									<div
+										className={`relative w-full mx-auto lg:mx-0 ${
+											landscapeGallery ? (metadata.heroVideo ? "" : "max-w-5xl lg:mx-auto") : "max-w-[336px]"
+										}`}
+									>
 										{/* Main Image Display */}
-										<div className="relative rounded-xl overflow-hidden bg-black shadow-2xl w-full aspect-[9/16]">
+										<div
+											className={`relative rounded-xl overflow-hidden bg-gray-900 shadow-2xl w-full ${
+												landscapeGallery ? "aspect-video" : "aspect-[9/16]"
+											}`}
+										>
+											<img
+												src={currentScreenshot?.src}
+												alt=""
+												aria-hidden="true"
+												className="absolute inset-0 w-full h-full object-cover scale-110 blur-2xl opacity-50"
+											/>
 											<img
 												src={currentScreenshot?.src}
 												alt={currentScreenshot?.alt}
-												className="w-full h-full object-contain bg-gray-900"
+												className="relative w-full h-full object-contain"
 											/>
 
 											{/* Navigation Arrows */}
@@ -292,7 +348,9 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ metadata, onBack }) => {
 														<button
 															key={index}
 															onClick={() => setCurrentImageIndex(index)}
-															className="relative flex-shrink-0 w-[52px] h-[84px]"
+															className={`relative flex-shrink-0 ${
+																landscapeGallery ? "w-[128px] h-[72px]" : "w-[52px] h-[84px]"
+															}`}
 														>
 															<div
 																className={`absolute inset-0 rounded-lg overflow-hidden border-2 transition-colors duration-200 ${

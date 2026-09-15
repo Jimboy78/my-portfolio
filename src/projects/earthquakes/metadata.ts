@@ -102,5 +102,5 @@ earthquake.save if earthquake.changed?`,
 		},
 	],
 
-	featured: true,
+	featured: false,
 };

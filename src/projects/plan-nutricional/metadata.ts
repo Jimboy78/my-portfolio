@@ -96,5 +96,5 @@ export const planNutricionalMetadata: ProjectMetadata = {
 		},
 	],
 
-	featured: true,
+	featured: false,
 };

@@ -98,5 +98,5 @@ export const rickMortyMetadata: ProjectMetadata = {
 		},
 	],
 
-	featured: true,
+	featured: false,
 };
