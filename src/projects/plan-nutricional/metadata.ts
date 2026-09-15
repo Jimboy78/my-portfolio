@@ -1,43 +1,85 @@
-import { Salad } from "lucide-react";
+import { Droplets, Flame, Salad, Target, Utensils } from "lucide-react";
 import type { ProjectMetadata } from "../types";
 import screenshot from "./assets/screenshot.jpg";
+import hoyRings from "./assets/hoy-rings.jpg";
+import week from "./assets/week.jpg";
+import dark from "./assets/dark.jpg";
 
 export const planNutricionalMetadata: ProjectMetadata = {
 	id: "plan-nutricional",
 	title: "Plan Nutricional",
-	subtitle: "Personal meal planning app with macro tracking",
+	subtitle: "Athlete nutrition coach: live macro rings, streaks & hydration",
 	period: "2026",
 	status: "production",
 
 	description:
-		"A Next.js meal-planning app for tracking a weekly nutrition plan by day, with macro breakdowns, a shopping list generator, batch-cooking view, and a supplements tracker — all persisted client-side.",
+		"A Next.js nutrition coach built around a real basketball player's training week. It detects today's day type, tracks meals against per-day macro targets with animated rings, counts down to the next meal, logs hydration, keeps a streak of completed days — plus supplements, batch cooking and a weekly shopping list.",
 
 	heroImage: screenshot,
 
-	solution: [
-		"Day-by-day meal plan view with per-meal macro breakdown (protein/carbs/fat)",
-		"Auto-generated shopping list derived from the active plan",
-		"Batch-cooking view to group meal prep by ingredient across the week",
-		"Supplements tracker and macro summary bar for at-a-glance daily totals",
-		"Local persistence via a custom useLocalStorage hook — no backend required",
+	stats: [
+		{ value: "3", label: "Day types (court / gym / rest)", icon: Target },
+		{ value: "17", label: "Meals across the plan", icon: Utensils },
+		{ value: "3.4k", label: "kcal on court days", icon: Flame },
+		{ value: "2.5 L", label: "Daily hydration goal", icon: Droplets },
 	],
+
+	challenge:
+		"A static nutrition plan in a document is easy to ignore. The goal was a daily companion that answers \"what do I eat next and how am I doing?\" in one glance, and makes sticking to the plan feel rewarding — without a backend or an account.",
+
+	solution: [
+		"\"Hoy\" dashboard as the default view: today's day type from the weekday, greeting, target kcal and a meal progress bar",
+		"Animated SVG macro rings (kcal, carbs, protein, fat) computed from checked meals and the chosen option for each meal",
+		"Next-meal card with a live countdown parsed from the plan's schedule",
+		"Hydration tracker with animated water glasses, reset per day",
+		"Streak of consecutive completed days derived from per-date localStorage history, with confetti when the day is complete",
+		"Weekly training chart color-coded by day type, highlighting today",
+		"Brand identity: basketball-and-leaf SVG logo and favicon, Bebas Neue + Outfit via next/font, animated gradient header, sticky pill navigation and dark mode",
+	],
+
+	result:
+		"A fully static Next.js app on Vercel that works as a daily habit tool: every piece of state lives on-device, keyed by date, so history, streaks and daily resets come for free.",
 
 	highlights: [
 		{
-			title: "Client-Side Persistence",
+			title: "Streaks from date-keyed storage",
 			description:
-				"Built a typed useLocalStorage hook to persist the entire nutrition plan and user edits in the browser, keeping the app fully static and deployable with zero backend infrastructure.",
+				"Each day's checklist is stored under its own date key, so a streak is just a walk backwards through history checking whether every meal of that day's plan was completed — no extra bookkeeping.",
+			code: `function computeStreak(): number {
+  let streak = 0;
+  for (let i = 1; i <= 90; i++) {
+    const d = new Date(Date.now() - i * 86400000);
+    const type = getDayTypeFor(d);
+    const map = JSON.parse(localStorage.getItem(\`nutri_meals_\${getDateKeyFor(d)}\`) ?? "{}");
+    if ((map[type]?.length ?? 0) >= PLAN[type].comidas.length) streak++;
+    else break;
+  }
+  return streak;
+}`,
+			language: "typescript",
 		},
 		{
-			title: "Derived Shopping List",
+			title: "Macros follow the chosen option",
 			description:
-				"Shopping list and batch-cooking views are computed from the same underlying plan data rather than maintained separately, so edits to the plan stay consistent everywhere they're shown.",
+				"Many meals offer alternatives with different macros. Rings, the summary bar and the day view all resolve a meal's macros through the same helper, so switching an option updates every total consistently.",
+		},
+		{
+			title: "SVG rings with CSS-driven motion",
+			description:
+				"Progress is a stroke-dashoffset on a circle; the fill animates with a CSS transition and glows once a target is reached — no charting library.",
 		},
 	],
 
-	techStack: ["Next.js 14", "React 18", "TypeScript", "TailwindCSS"],
+	screenshots: [
+		{ src: screenshot, alt: "Hoy dashboard", caption: "Today's day type, targets, meal progress and streak" },
+		{ src: hoyRings, alt: "Macro rings and hydration", caption: "Live macro rings, next meal and hydration tracker" },
+		{ src: week, alt: "Weekly training chart", caption: "Weekly plan color-coded by day type" },
+		{ src: dark, alt: "Completed day in dark mode", caption: "Day complete — streak and celebration, in dark mode" },
+	],
 
-	gradient: "from-green-500 via-emerald-500 to-teal-500",
+	techStack: ["Next.js 14", "React 18", "TypeScript", "SVG", "CSS Animations", "localStorage", "Vercel"],
+
+	gradient: "from-orange-500 via-amber-500 to-green-500",
 	icon: Salad,
 	thumbnailImage: screenshot,
 
@@ -54,5 +96,5 @@ export const planNutricionalMetadata: ProjectMetadata = {
 		},
 	],
 
-	featured: false,
+	featured: true,
 };
