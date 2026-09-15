@@ -1,5 +1,9 @@
 import { CalendarCheck, Flame, MapPin, Trophy, Users } from "lucide-react";
 import type { ProjectMetadata } from "../types";
+import showcase from "./assets/showcase.jpg";
+import discover from "./assets/discover.jpg";
+import ranking from "./assets/ranking.jpg";
+import courts from "./assets/courts.jpg";
 
 export const sportsMatchmakingMetadata: ProjectMetadata = {
 	id: "sports-matchmaking",
@@ -70,6 +74,15 @@ export const sportsMatchmakingMetadata: ProjectMetadata = {
 		"react-native-svg",
 		"Vercel",
 	],
+
+	screenshots: [
+		{ src: showcase, alt: "Desktop showcase", caption: "Web build: landing column next to the app in a phone frame" },
+		{ src: discover, alt: "Discover deck", caption: "Swipe deck ordered by affinity score" },
+		{ src: ranking, alt: "Leaderboard", caption: "Animated podium with ELO per sport" },
+		{ src: courts, alt: "Courts map", caption: "Nearby courts on a Leaflet map with prices and ratings" },
+	],
+
+	thumbnailImage: showcase,
 
 	gradient: "from-lime-400 via-green-500 to-emerald-600",
 	icon: CalendarCheck,
