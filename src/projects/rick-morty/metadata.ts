@@ -1,19 +1,22 @@
 import { Atom } from "lucide-react";
 import type { ProjectMetadata } from "../types";
+import screenshot from "./assets/screenshot.jpg";
 
 export const rickMortyMetadata: ProjectMetadata = {
 	id: "rick-morty",
 	title: "Rick & Morty Encyclopedia",
-	subtitle: "API-driven character, episode, and location browser",
+	subtitle: "API-driven character browser",
 	period: "2024",
 	status: "completed",
 
 	description:
-		"A React + TypeScript app consuming the public Rick and Morty API to browse characters, episodes, and locations, with dedicated service modules for each resource type.",
+		"A React + TypeScript app consuming the public Rick and Morty API to browse characters, with a typed API service layer decoupled from the UI.",
+
+	heroImage: screenshot,
 
 	solution: [
 		"Vite + React + TypeScript setup with strict typing across API responses",
-		"Separate API service modules for characters, episodes, and locations",
+		"Typed API service module for characters, decoupled from UI components",
 		"Component-driven character browser backed by live API data",
 	],
 
@@ -21,7 +24,7 @@ export const rickMortyMetadata: ProjectMetadata = {
 		{
 			title: "Typed API Service Layer",
 			description:
-				"Isolated API access into dedicated service modules (CharacterApi, EpisodeApi, LocationApi) so data-fetching concerns stay decoupled from UI components.",
+				"Isolated API access into a dedicated service module (CharacterApi) with typed responses, so data-fetching concerns stay decoupled from UI components.",
 		},
 	],
 
@@ -29,8 +32,14 @@ export const rickMortyMetadata: ProjectMetadata = {
 
 	gradient: "from-lime-500 via-green-500 to-emerald-600",
 	icon: Atom,
+	thumbnailImage: screenshot,
 
 	links: [
+		{
+			label: "Live Demo",
+			url: "https://rick-morty-encyclopedia-seven.vercel.app",
+			type: "demo",
+		},
 		{
 			label: "View on GitHub",
 			url: "https://github.com/Jimboy78/rick-morty-encyclopedia",
