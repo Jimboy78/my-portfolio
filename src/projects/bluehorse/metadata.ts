@@ -1,5 +1,6 @@
 import { Dumbbell, TestTube2, Code2, ShieldCheck } from "lucide-react";
 import type { ProjectMetadata } from "../types";
+import screenshot from "./assets/screenshot.jpg";
 
 export const bluehorseMetadata: ProjectMetadata = {
 	id: "bluehorse",
@@ -10,6 +11,8 @@ export const bluehorseMetadata: ProjectMetadata = {
 
 	description:
 		"A full-stack adaptive training PWA built for Blue Horse Gym (Arroyo Seco, Santa Fe, Argentina), generating and adjusting workout plans using only the equipment that physically exists in the gym. Designed and built solo, from schema to production deploy.",
+
+	heroImage: screenshot,
 
 	stats: [
 		{ value: "35K+", label: "Lines of Code", icon: Code2 },
@@ -77,6 +80,7 @@ export const bluehorseMetadata: ProjectMetadata = {
 
 	gradient: "from-blue-700 via-indigo-700 to-slate-800",
 	icon: Dumbbell,
+	thumbnailImage: screenshot,
 
 	links: [
 		{

@@ -1,5 +1,6 @@
 import { Salad } from "lucide-react";
 import type { ProjectMetadata } from "../types";
+import screenshot from "./assets/screenshot.jpg";
 
 export const planNutricionalMetadata: ProjectMetadata = {
 	id: "plan-nutricional",
@@ -10,6 +11,8 @@ export const planNutricionalMetadata: ProjectMetadata = {
 
 	description:
 		"A Next.js meal-planning app for tracking a weekly nutrition plan by day, with macro breakdowns, a shopping list generator, batch-cooking view, and a supplements tracker — all persisted client-side.",
+
+	heroImage: screenshot,
 
 	solution: [
 		"Day-by-day meal plan view with per-meal macro breakdown (protein/carbs/fat)",
@@ -36,6 +39,7 @@ export const planNutricionalMetadata: ProjectMetadata = {
 
 	gradient: "from-green-500 via-emerald-500 to-teal-500",
 	icon: Salad,
+	thumbnailImage: screenshot,
 
 	links: [
 		{
